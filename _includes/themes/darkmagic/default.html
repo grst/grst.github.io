@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>{{ page.title }}</title>
+<title>Gregor Sturm - {{ page.header }}</title>
 {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
 <meta name="author" content="{{ site.author.name }}">
 
@@ -39,7 +39,7 @@
                 <ul class="nav navbar-nav">
                     {% assign pages_list = site.pages %}
                     {% assign group = 'navigation' %}
-                    {% assign nav_limit = 3 %}
+                    {% assign nav_limit = 4 %}
                     {% assign nav_offset = 0 %}
                     {% include JB/pages_list_2 %}
                 </ul>
@@ -60,7 +60,7 @@
                     {% assign pages_list = site.pages %}
                     {% assign group = 'navigation' %}
                     {% assign nav_limit = 6 %}
-                    {% assign nav_offset = 3 %}
+                    {% assign nav_offset = 4 %}
                     {% include JB/pages_list_2 %}
                 </ul>
             </div>
