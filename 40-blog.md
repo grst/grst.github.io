@@ -1,7 +1,10 @@
 ---
 layout: page
-title: Hello World!
+title: blog 
 tagline: Supporting tagline
+header: Blog
+group: navigation
+permalink: blog.html
 ---
 {% include JB/setup %}
 

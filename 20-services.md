@@ -1,6 +1,8 @@
 ---
 layout: page
-title: Hello World!
+title: leistungen 
+header: Leistungen 
+group: navigation
 tagline: Supporting tagline
 ---
 {% include JB/setup %}
