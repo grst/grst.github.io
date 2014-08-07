@@ -2,7 +2,7 @@
 layout: page
 title: leistungen 
 header: Leistungen 
-group: navigation
+group: nav_left 
 ---
 {% include JB/setup %}
 

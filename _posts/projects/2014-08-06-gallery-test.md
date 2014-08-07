@@ -1,6 +1,6 @@
 ---
 layout: post
-category : Allgemein 
+category : projects 
 tags : [jekyll]
 ---
 {% include JB/setup %}

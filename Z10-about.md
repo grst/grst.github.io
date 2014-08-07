@@ -2,7 +2,7 @@
 layout: page
 title: über mich 
 header: Über mich 
-group: navigation
+group: nav_left 
 permalink: about.html
 ---
 {% include JB/setup %}

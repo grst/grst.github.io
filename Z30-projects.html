@@ -1,0 +1,14 @@
+---
+layout: page
+title: projekte 
+header: Projekte 
+group: nav_right 
+permalink: projekte.html
+---
+{% include JB/setup %}
+
+{% for post in site.categories[projects] %}
+<h2 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+<p class="post-meta">{{ post.date | date_to_string }}</p>
+<p class="post-excerpt">{{ post.excerpt | strip_html }}&hellip; (<a href="{{ post.url }}">Weiterlesen</a>)</p>
+{% endfor %}

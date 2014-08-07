@@ -15,7 +15,7 @@
         <![endif]-->
 
 <!-- Le styles -->
-<link href="/{{ BASE_PATH }}{{ ASSET_PATH }}/themes/darkmagic/styles.min.css" rel="stylesheet">
+<link href="{{ BASE_PATH }}{{ ASSET_PATH }}/themes/darkmagic/styles.min.css" rel="stylesheet">
 
 <!-- Le fav and touch icons -->
 <!-- Update these with your own images
@@ -35,13 +35,11 @@
 <div class="navbar navbar-fixed-top navbar-default" role="navigation">
     <div class="container">     
         <div class="navbar-center">
-            <div class="navbar-collapse collapse navbar-items">
+            <div class="navbar-collapse collapse navbar-items navbar-items-left">
                 <ul class="nav navbar-nav">
                     {% assign pages_list = site.pages %}
-                    {% assign group = 'navigation' %}
-                    {% assign nav_limit = 4 %}
-                    {% assign nav_offset = 0 %}
-                    {% include JB/pages_list_2 %}
+                    {% assign group = 'nav_left' %}
+                    {% include JB/pages_list %}
                 </ul>
             </div>
             <div class="navbar-header">
@@ -55,13 +53,11 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div class="navbar-collapse collapse navbar-items" id="navbar-main">
+            <div class="navbar-collapse collapse navbar-items navbar-items-right">
                 <ul class="nav navbar-nav">
                     {% assign pages_list = site.pages %}
-                    {% assign group = 'navigation' %}
-                    {% assign nav_limit = 6 %}
-                    {% assign nav_offset = 4 %}
-                    {% include JB/pages_list_2 %}
+                    {% assign group = 'nav_right' %}
+                    {% include JB/pages_list %}
                 </ul>
             </div>
         </div>

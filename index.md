@@ -2,7 +2,7 @@
 layout: page
 title: start 
 header: Willkommen... 
-group: navigation 
+group: nav_left 
 permalink: index.html
 ---
 {% include JB/setup %}
