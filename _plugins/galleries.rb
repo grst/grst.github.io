@@ -155,9 +155,10 @@ module Jekyll
 	 		if items.count > 0
 		 		items.each do |item|
 		 			img = Magick::Image.read(item['file']).first
-		 			thumb = img.resize_to_fill!(@config['thumb_width'], @config['thumb_height'])
-		 			thumb.write(item['thumbname'])
-		 			thumb.destroy!
+		 			thumb = img.resize_to_fill(@config['thumb_width'], @config['thumb_height'])
+                    print item['thumbname'] 
+		 			thumb.write("/cygdrive/c/Users/Gregor/Documents/Local/repos/grst.github.com/_site/test.jpg")
+                    thumb.destroy!()
 		 		end
 	 		end
 	 	end

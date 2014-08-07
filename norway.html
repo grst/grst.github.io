@@ -7,7 +7,7 @@ permalink: norwegen.html
 ---
 {% include JB/setup %}
 
-{% for post in site.categories[norway] %}
+{% for post in site.categories.norway %}
 <h2 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
 <p class="post-meta">{{ post.date | date_to_string }}</p>
 <p class="post-excerpt">{{ post.excerpt | strip_html }}&hellip; (<a href="{{ post.url }}">Weiterlesen</a>)</p>
