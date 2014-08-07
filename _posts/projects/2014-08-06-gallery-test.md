@@ -9,6 +9,5 @@ Endlich habe ich es geschafft meine Website neu aufzusetzen.
 Lorem ispum dolor sit amet. 
 
 {% gallery test %}
-ifen/DSC00093.jpg
-ifen/DSC00094.jpg
+ifen/
 {% endgallery %}

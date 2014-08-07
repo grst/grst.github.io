@@ -126,8 +126,8 @@ JB :
   #   ./_includes/custom/[HELPER]
   # where [HELPER] is the name of the helper you are overriding.
 gallerytag:
-    dir: images/galleries 
-    url: /images/galleries
+    source_dir: images/gallery
+    destination_dir: images/thumbs
     thumb_width: 150
     thumb_height: 150
     columns: 4
