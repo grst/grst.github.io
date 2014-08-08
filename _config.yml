@@ -128,6 +128,6 @@ JB :
 gallerytag:
     source_dir: images/gallery
     destination_dir: images/thumbs
-    thumb_width: 150
-    thumb_height: 150
-    columns: 4
+    thumb_width: 300 
+    thumb_height: 300 
+    columns: 0
