@@ -29,6 +29,7 @@
 <!--    <link href="{{ BASE_PATH }}{{ site.JB.atom_path }}" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
         <link href="{{ BASE_PATH }}{{ site.JB.rss_path }}" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
     -->
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 </head>
 
 <body>
@@ -72,15 +73,12 @@
 </div>
 <div class="footer">
     <div class="container">
-        <p class="text-muted">&copy; {{ site.time | date: '%Y' }} {{ site.author.name }} - <a href="impressum.html">Impressum</a>
+        <p class="text-muted">&copy; {{ site.time | date: '%Y' }} {{ site.author.name }} - <a href="/{{ BASE_PATH}}impressum.html">Impressum</a>
         </p>
     </div>
 </div>
-{% include themes/darkmagic/gallery.html %}
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="/{{ BASE_PATH }}{{ ASSET_PATH}}/js/blueimp-gallery.min.js"></script>
-<script src="/{{ BASE_PATH }}{{ ASSET_PATH}}/js/bootstrap-image-gallery.min.js"></script>
+<script src="/{{ BASE_PATH}}{{ ASSET_PATH}}/js/colorbox.min.js"></script>
 {% include JB/analytics %}
 </body>
 </html>

@@ -36,7 +36,7 @@ module Jekyll
 			images = gallery_images(context)
 
 			images_html = ""
-			images_html << "<div class=\"row gallery-list\">\n" if columns <= 0 
+			images_html << "<div class=\"gallery-list row\">\n" if columns <= 0 
 			images.each_with_index do |image, key|
                 if columns > 0
                     images_html << gen_images_column_html(image, width, height, custom_attribute_name, key, columns)
@@ -47,6 +47,7 @@ module Jekyll
             images_html << "</div>\n" if columns <= 0
 			images_html << "<br style=\"clear: both;\">" if columns > 0 && images.count % columns != 0
 			gallery_html = "<div class=\"gallery\">\n\n#{images_html}\n\n</div>\n"
+            gallery_html << "<script type=\"text/javascript\">\n$(document).ready(function(){$('.#{@gallery_name}').colorbox({rel: '.#{@gallery_name}', maxWidth: '90%', maxHeight: '90%'})});\n</script>"
 
 			return gallery_html
 		end
@@ -64,9 +65,9 @@ module Jekyll
 		end
 		
 		def gen_images_list_html(image, width, height, custom_attribute_name)
-		    html =  "\t<div class=\"col-md-2 col-sm-3\">\n"
+		    html =  "\t<div class=\"col-md-3 col-sm-4 col-lg-2 col-xs-6\">\n"
 		    html << "\t\t" << gen_img_html(image['url'], image['thumbnail'], width, height, image['caption'], custom_attribute_name) << "\n"
-		    html << "\t\t<span>#{image['caption']}</span>\n"
+		    #html << "\t\t<span>#{image['caption']}</span>\n"
 		    html << "\t</div>\n"
 		    
 		    return html
@@ -74,8 +75,8 @@ module Jekyll
 		
 
         def gen_img_html(full_img_url, thumb_img_url, w, h, caption, custom_attribute_name)
-            img_html =  "<a class=\"thumbnail gallery-link\" href=\"#{full_img_url}\" title=\"#{caption}\" #{custom_attribute_name}=\"#{@gallery_name}\" data-gallery=\"true\">"
-            img_html << "<img src=\"#{thumb_img_url}\" class=\"thumbnail\" width=\"#{w}\" height=\"#{h}\" />"
+            img_html =  "<a class=\"gallery-link #{@gallery_name} \" href=\"#{full_img_url}\" title=\"#{caption}\" #{custom_attribute_name}=\"#{@gallery_name}\">"
+            img_html << "<img class=\"thumbnail\" src=\"#{thumb_img_url}\" />"
             img_html << "</a>"
             
             return img_html
