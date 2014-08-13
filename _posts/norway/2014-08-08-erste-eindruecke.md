@@ -8,7 +8,9 @@ thumb: 2014-08-08_trondheim/DSC00273.jpg
 
 Hei Hei!
 
-Vorgestern bin ich nach einer problemlosen Reise über Kopenhagen in Trondheim angekommen. Praktischerweise habe ich im Flugzeug jemanden getroffen der mich mit dem Auto bis zum Studentenwohnheim in Moholt mitnehmen konnte. Die Wohnanlage in Moholt ist besteht aus einzelnen Backsteingebäuden, die in etwa vier Stockwerke hoch sind. In jedem Stockwerk sind zwei 4er-WGs untergebracht. Die Schlafzimmer sind recht spartanisch ausgestatted und haben im leeren Zustand ein bisschen den
+Vorgestern bin ich nach einer problemlosen Reise über Kopenhagen in Trondheim angekommen. Praktischerweise habe ich im Flugzeug jemanden getroffen der mich mit dem Auto bis zum Studentenwohnheim in Moholt mitnehmen konnte. Die Wohnanlage in Moholt ist besteht aus einzelnen Backsteingebäuden, die in etwa vier Stockwerke hoch sind.
+<!--more-->
+In jedem Stockwerk sind zwei 4er-WGs untergebracht. Die Schlafzimmer sind recht spartanisch ausgestatted und haben im leeren Zustand ein bisschen den
 Charme einer Gefängniszelle, das ließ sich aber mit einem kurzen Besuch bei Ikea schnell beheben. Die Küche ist dafür umso gemütlicher und unglaublich geräumig. Auch ansonsten gibt es dort alles was man braucht: Direkt auf dem Gelände befinden sich zwei Supermärkte, die auch Sonntags und bis Nachts um 11 Uhr geöffnet haben. Außerdem gibt es Waschsalons und ein "Activity House". Was es damit auf sich hat werde ich im Laufe der nächsten Woche herausfinden. 
 
 Am Donnerstag konnte ich mit bei schönstem Wetter bei einem kleinen Stadtrundgang einen Überblick über Trondheim verschaffen. Von der "Kristiansten Fortress" hatte ich einen guten Blick über die Stadt. Von dort gings weiter in Richtung der Altstadt. Dieser Stadtteil hat mit den bunten Holzhäusern einen ganz besonderen Charme. Sehr beeindruckend ist auch das Haupgebäude der Universität, das etwas von einem alten Schloss hat. 

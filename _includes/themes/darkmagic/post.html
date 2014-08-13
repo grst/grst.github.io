@@ -29,14 +29,14 @@
 -->
     <hr>
     <div class="pagination container center-block">
-      {% if page.previous %}
-        <a class="btn btn-default" href="{{ BASE_PATH }}{{ page.previous.url }}" title="{{ page.previous.title }}">&larr; Previous</a>
+      {% if page.cat_prev %}
+        <a class="btn btn-default" href="{{ BASE_PATH }}{{ page.cat_prev.url }}" title="{{ page.cat_prev.title }}">&larr; Previous</a>
       {% else %}
        <a class="btn btn-default disabled">&larr; Previous</a>
       {% endif %}
       <!-- <a href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Archive</a></li> -->
-      {% if page.next %}
-       <a class="btn btn-default" href="{{ BASE_PATH }}{{ page.next.url }}" title="{{ page.next.title }}">Next &rarr;</a>
+      {% if page.cat_next %}
+       <a class="btn btn-default" href="{{ BASE_PATH }}{{ page.cat_next.url }}" title="{{ page.cat_next.title }}">Next &rarr;</a>
       {% else %}
        <a class="btn btn-default disabled">Next &rarr;</a>
       {% endif %}

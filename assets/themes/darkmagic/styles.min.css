@@ -6246,6 +6246,12 @@ body {
   max-width: 100%;
   max-height: 100%;
 }
+.blogthumb {
+  max-width: 250px;
+}
+.post-excerpt h2 {
+  margin-top: 12px;
+}
 /*
     Colorbox Core Style:
     The following CSS is consistent between example themes and should not be altered.

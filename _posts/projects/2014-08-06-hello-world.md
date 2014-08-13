@@ -5,7 +5,7 @@ tags : [jekyll]
 title: Hello World!
 ---
 {% include JB/setup %}
-I finally managed to set up my new website using [Jekyll and Bootstrap](http://jekyllbootstrap.com/). This allows me to maintain my website in a quite hackish way: I can write all entries and blogposts on the console in vi using pure markdown. The markdown is then compiled to a static html site. The article by [Mike Greiling](http://pixelcog.com/blog/2013/jekyll-from-scratch-core-architecture/) was a great help while creating the site. 
+I finally managed to set up my new website using [Jekyll and Bootstrap](http://jekyllbootstrap.com/). This allows me to maintain my website in a quite hackish way: I can write all entries and blogposts on the console in vi using pure markdown. The markdown is then compiled to a static html site.<!--more--> The article by [Mike Greiling](http://pixelcog.com/blog/2013/jekyll-from-scratch-core-architecture/) was a great help while creating the site. 
 
 {% comment %}
 ## Issues I encountered

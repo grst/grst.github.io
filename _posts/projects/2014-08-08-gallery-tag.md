@@ -4,7 +4,7 @@ category : projects
 tags : [jekyll]
 ---
 {% include JB/setup %}
-Since I will soon begin to write some posts about my ERASMUS-Exchange to Trondheim, Norway, I needed to find a solution for displaying galleries (what would be a travel-blog without pictures!?). The [JekyllGalleryTag](https://github.com/redwallhp/JekyllGalleryTag) seemed as a good solution to me. It promised to generate thumbnails automatically using ImageMagick and is easy to embedd in a post by using a Liquid-Tag:
+Since I will soon begin to write some posts about my ERASMUS-Exchange to Trondheim, Norway, I needed to find a solution for displaying galleries (what would be a travel-blog without pictures!?). The [JekyllGalleryTag](https://github.com/redwallhp/JekyllGalleryTag) seemed as a good solution to me.<!--more--> It promised to generate thumbnails automatically using ImageMagick and is easy to embedd in a post by using a Liquid-Tag:
 
     {% raw %}
     {% gallery galleryname %}
