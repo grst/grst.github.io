@@ -34,25 +34,28 @@
 
 <body>
 <div class="navbar navbar-fixed-top navbar-default" role="navigation">
-    <div class="container">     
+    <div class="container-fluid navbar-main">     
         <div class="navbar-center">
-            <div class="navbar-collapse collapse navbar-items navbar-items-left">
-                <ul class="nav navbar-nav">
-                    {% assign pages_list = site.pages %}
-                    {% assign group = 'nav_left' %}
-                    {% include JB/pages_list %}
-                </ul>
-            </div>
             <div class="navbar-header">
                 <div class="root">
                     <a class="" href="{{ HOME_PATH }}"><img src="/{{ BASE_PATH }}{{ ASSET_PATH }}/gregorsturm.png" alt="logo" /></a><br />
-                    <!--                    <a class="navbar-brand" href="{{ HOME_PATH }}">{{ site.title }}</a>-->
+                </div>
+                <div class="root-caption">
+                    <a href="{{ HOME_PATH }}">{{ site.title | downcase }}</a>
                 </div>
                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-items">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+            </div>
+
+            <div class="navbar-collapse collapse navbar-items navbar-items-left">
+                <ul class="nav navbar-nav">
+                    {% assign pages_list = site.pages %}
+                    {% assign group = 'nav_left' %}
+                    {% include JB/pages_list %}
+                </ul>
             </div>
             <div class="navbar-collapse collapse navbar-items navbar-items-right">
                 <ul class="nav navbar-nav">
@@ -62,6 +65,8 @@
                 </ul>
             </div>
         </div>
+    </div>
+    <div class="container-fluid navbar-triangle">
     </div>
 </div>
 
@@ -79,6 +84,7 @@
 </div>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="/{{ BASE_PATH}}{{ ASSET_PATH}}/js/colorbox.min.js"></script>
+<script type="text/javascript">{% include themes/darkmagic/scripts.js %}</script>
 {% include JB/analytics %}
 </body>
 </html>

@@ -8,7 +8,7 @@ thumb: 2014-08-08_trondheim/DSC00273.jpg
 
 Hei Hei!
 
-Vorgestern bin ich nach einer problemlosen Reise über Kopenhagen in Trondheim angekommen. Praktischerweise habe ich im Flugzeug jemanden getroffen der mich mit dem Auto bis zum Studentenwohnheim in Moholt mitnehmen konnte. Die Wohnanlage in Moholt ist besteht aus einzelnen Backsteingebäuden, die in etwa vier Stockwerke hoch sind.
+Vorgestern bin ich nach einer problemlosen Reise über Kopenhagen in Trondheim angekommen. Praktischerweise habe ich im Flugzeug jemanden getroffen der mich mit dem Auto bis zum Studentenwohnheim in Moholt mitnehmen konnte. Die Wohnanlage in Moholt besteht aus einzelnen Backsteingebäuden, die in etwa vier Stockwerke hoch sind.
 <!--more-->
 In jedem Stockwerk sind zwei 4er-WGs untergebracht. Die Schlafzimmer sind recht spartanisch ausgestatted und haben im leeren Zustand ein bisschen den
 Charme einer Gefängniszelle, das ließ sich aber mit einem kurzen Besuch bei Ikea schnell beheben. Die Küche ist dafür umso gemütlicher und unglaublich geräumig. Auch ansonsten gibt es dort alles was man braucht: Direkt auf dem Gelände befinden sich zwei Supermärkte, die auch Sonntags und bis Nachts um 11 Uhr geöffnet haben. Außerdem gibt es Waschsalons und ein "Activity House". Was es damit auf sich hat werde ich im Laufe der nächsten Woche herausfinden. 

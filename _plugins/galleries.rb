@@ -7,7 +7,7 @@
 # Copyright: Copyright 2013 Matt Harzewski
 # License: GPLv2 or later
 # Version: 1.3.0
-
+require "htmlentities"
 
 module Jekyll
 
@@ -119,7 +119,8 @@ module Jekyll
             
             if cap_ref != nil
                 cap = String.new(cap_ref)
-        
+                coder = HTMLEntities.new
+                cap = coder.encode(cap)
                 if itemnum != nil
                     cap << " (#{itemnum})"
                 end
