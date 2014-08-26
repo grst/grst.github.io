@@ -1251,7 +1251,7 @@ dt {
 dd {
   margin-left: 0;
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .dl-horizontal dt {
     float: left;
     width: 160px;
@@ -3230,7 +3230,7 @@ tbody.collapse.in {
   bottom: 100%;
   margin-bottom: 1px;
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .navbar-right .dropdown-menu {
     left: auto;
     right: 0;
@@ -3763,12 +3763,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-bottom: 21px;
   border: 1px solid transparent;
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .navbar {
     border-radius: 0;
   }
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .navbar-header {
     float: left;
   }
@@ -3784,7 +3784,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-collapse.in {
   overflow-y: auto;
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .navbar-collapse {
     width: auto;
     border-top: 0;
@@ -3823,7 +3823,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-right: -15px;
   margin-left: -15px;
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .container > .navbar-header,
   .container-fluid > .navbar-header,
   .container > .navbar-collapse,
@@ -3836,7 +3836,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   z-index: 1000;
   border-width: 0 0 1px;
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .navbar-static-top {
     border-radius: 0;
   }
@@ -3850,7 +3850,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .navbar-fixed-top,
   .navbar-fixed-bottom {
     border-radius: 0;
@@ -3876,7 +3876,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand:focus {
   text-decoration: none;
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .navbar > .container .navbar-brand,
   .navbar > .container-fluid .navbar-brand {
     margin-left: -15px;
@@ -3906,7 +3906,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-toggle .icon-bar + .icon-bar {
   margin-top: 4px;
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .navbar-toggle {
     display: none;
   }
@@ -3919,7 +3919,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding-bottom: 10px;
   line-height: 21px;
 }
-@media (max-width: 839px) {
+@media (max-width: 887px) {
   .navbar-nav .open .dropdown-menu {
     position: static;
     float: none;
@@ -3941,7 +3941,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     background-image: none;
   }
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .navbar-nav {
     float: left;
     margin: 0;
@@ -3957,7 +3957,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-right: -15px;
   }
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .navbar-left {
     float: left !important;
   }
@@ -4023,12 +4023,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     top: 0;
   }
 }
-@media (max-width: 839px) {
+@media (max-width: 887px) {
   .navbar-form .form-group {
     margin-bottom: 5px;
   }
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .navbar-form {
     width: auto;
     border: 0;
@@ -4068,7 +4068,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-top: 29.5px;
   margin-bottom: 29.5px;
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .navbar-text {
     float: left;
     margin-left: 15px;
@@ -4133,7 +4133,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: #272727;
   color: #ffffff;
 }
-@media (max-width: 839px) {
+@media (max-width: 887px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #ffffff;
   }
@@ -4229,7 +4229,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   background-color: #006687;
   color: #ffffff;
 }
-@media (max-width: 839px) {
+@media (max-width: 887px) {
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
     border-color: #006687;
   }
@@ -6205,7 +6205,8 @@ body {
   top: 70px;
 }
 .navbar {
-  background-color: #ffffff;
+  display: block;
+  background-color: transparent;
 }
 .navbar * {
   -webkit-transition: all 0.5s ease;
@@ -6231,36 +6232,28 @@ body {
   top: 0;
 }
 .navbar-items-left {
-  right: 50%;
+  right: 53%;
   margin-right: 80px;
 }
-@media (max-width: 840px) {
-  .navbar-items-left.collapse.in li:hover,
-  .navbar-items-left.collapsing li:hover,
-  .navbar-items-left.collapse.in li.active,
-  .navbar-items-left.collapsing li.active {
-    border-left: 20px solid #9999ff;
-  }
-}
 .navbar-items-right {
-  left: 50%;
+  left: 53%;
   margin-left: 80px;
 }
-@media (max-width: 840px) {
-  .navbar-items-right.collapse.in,
-  .navbar-items-right.collapsing {
-    text-align: right;
+@media (max-width: 888px) {
+  .navbar.collapse .navbar-items {
+    display: none;
   }
-  .navbar-items-right.collapse.in li:hover,
-  .navbar-items-right.collapsing li:hover,
-  .navbar-items-right.collapse.in li.active,
-  .navbar-items-right.collapsing li.active {
-    border-right: 20px solid #9999ff;
+  .navbar.collapse.in,
+  .navbar.collapsing {
+    background-color: #333333;
   }
-}
-@media (max-width: 840px) {
-  .navbar-collapse.collapse.in,
-  .navbar-collapse.collapsing {
+  .navbar.collapse.in .root-caption,
+  .navbar.collapsing .root-caption {
+    display: none;
+  }
+  .navbar.collapse.in .navbar-items,
+  .navbar.collapsing .navbar-items {
+    display: block;
     width: 50%;
     position: relative;
     float: left;
@@ -6269,32 +6262,48 @@ body {
     left: 0;
     overflow: hidden;
   }
-  .navbar-collapse.collapse.in .navbar-nav > li > a,
-  .navbar-collapse.collapsing .navbar-nav > li > a {
+  .navbar.collapse.in .navbar-items .navbar-nav > li > a,
+  .navbar.collapsing .navbar-items .navbar-nav > li > a {
     border: none;
     margin: 0;
   }
-  .navbar-collapse.collapse.in .navbar-nav > li > a:hover,
-  .navbar-collapse.collapsing .navbar-nav > li > a:hover {
+  .navbar.collapse.in .navbar-items .navbar-nav > li > a:hover,
+  .navbar.collapsing .navbar-items .navbar-nav > li > a:hover {
     border: none;
     background-color: inherit;
   }
-  .navbar-collapse.collapse.in .navbar-nav > li.active > a,
-  .navbar-collapse.collapsing .navbar-nav > li.active > a {
+  .navbar.collapse.in .navbar-items .navbar-nav > li.active > a,
+  .navbar.collapsing .navbar-items .navbar-nav > li.active > a {
     background-color: inherit;
   }
+  .navbar.collapse.in .navbar-items-left li:hover,
+  .navbar.collapsing .navbar-items-left li:hover,
+  .navbar.collapse.in .navbar-items-left li.active,
+  .navbar.collapsing .navbar-items-left li.active {
+    border-left: 20px solid #9999ff;
+  }
+  .navbar.collapse.in .navbar-items-right,
+  .navbar.collapsing .navbar-items-right {
+    text-align: right;
+  }
+  .navbar.collapse.in .navbar-items-right li:hover,
+  .navbar.collapsing .navbar-items-right li:hover,
+  .navbar.collapse.in .navbar-items-right li.active,
+  .navbar.collapsing .navbar-items-right li.active {
+    border-right: 20px solid #9999ff;
+  }
 }
-.navbar-collapse .navbar-nav > li > a {
+.navbar-items .navbar-nav > li > a {
   margin-top: 2px;
   margin-bottom: 2px;
   padding-bottom: 30px;
   padding-top: 24.5px;
 }
-.navbar-collapse .navbar-nav > li > a:hover {
+.navbar-items .navbar-nav > li > a:hover {
   border-top: 2px solid #9999ff;
   margin-top: 0px;
 }
-@media (min-width: 840px) {
+@media (min-width: 888px) {
   .navbar-center {
     margin: 0 auto;
     display: table;
@@ -6305,15 +6314,18 @@ body {
 .navbar-default .navbar-nav {
   font-variant: small-caps;
 }
+.navbar.shrink .navbar-toggle {
+  margin-top: 12px;
+}
 .navbar.shrink .root-caption {
   display: none;
 }
 .navbar.shrink .navbar-main {
-  height: 60px;
+  height: 56px;
 }
 .navbar.shrink .navbar-collapse .navbar-nav > li > a {
-  padding-bottom: 21px;
-  padding-top: 14.5px;
+  padding-bottom: 19px;
+  padding-top: 12.5px;
 }
 .footer {
   position: absolute;
