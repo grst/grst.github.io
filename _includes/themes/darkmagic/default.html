@@ -6,7 +6,7 @@
 {% endunless %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ locale }}">
 <head>
 <meta charset="utf-8">
 <title>Gregor Sturm - {{ page.header }}</title>
@@ -45,10 +45,10 @@
         <div class="navbar-center">
             <div class="navbar-header">
                 <div class="root">
-                    <a class="" href="{{ HOME_PATH }}"><img src="/{{ BASE_PATH }}{{ ASSET_PATH }}/gregorsturm.png" alt="logo" /></a><br />
+                    <a class="" href="{{ site.data.locales[locale].home_path }}"><img src="/{{ BASE_PATH }}{{ ASSET_PATH }}/gregorsturm.png" alt="logo" /></a><br />
                 </div>
                 <div class="root-caption">
-                    <a href="{{ HOME_PATH }}">{{ site.title | downcase }}</a>
+                    <a href="{{ site.data.locales[locale].home_path }}">{{ site.title | downcase }}</a>
                 </div>
                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar">
                     <span class="icon-bar"></span>
@@ -73,6 +73,24 @@
                             <a href="{{ link.url }}">{{ link.text }}</a>
                         </li>
                     {% endfor %}
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                        {% if locale == "de" %}
+                        <img class="flag" src="{% base64 assets/de.svg %}"/>
+                        {% else %}
+                        <img class="flag" src="{% base64 assets/en.svg %}"/>
+                        {% endif %} 
+
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/">
+                            <img class="flag" src="{% base64 assets/de.svg %}" />
+                            deutsch</a></li>
+                        <li><a href="/en"><img class="flag" src="{% base64 assets/en.svg %}" />
+                            english</a></li>
+                    </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -89,7 +107,7 @@
 </div>
 <div class="footer">
     <div class="container">
-        <p class="text-muted">&copy; {{ site.time | date: '%Y' }} {{ site.author.name }} - <a href="/{{ BASE_PATH}}impressum.html">Impressum</a>
+        <p class="text-muted">&copy; {{ site.time | date: '%Y' }} {{ site.author.name }} - <a href="/{{ BASE_PATH}}imprint.html">{{ site.data.locales[locale].imprint }}</a>
         </p>
     </div>
 </div>
