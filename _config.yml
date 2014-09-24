@@ -3,7 +3,7 @@
 permalink: /:categories/:year/:month/:day/:title 
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-pygments: true
+highlighting: pygments
 
 markdown : kramdown
 excerpt_separator: <!--more--> 
@@ -25,7 +25,7 @@ author :
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://grst.github.io
+production_url : http://gregor-sturm.de 
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -133,3 +133,8 @@ gallerytag:
     thumb_width: 300 
     thumb_height: 300 
     columns: 0
+
+pageinate_per_category: true
+default_category: "de"
+default_locale:     "de"
+authorized_locales: ["de", "en"]

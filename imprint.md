@@ -2,7 +2,6 @@
 layout: page
 title: Impressum 
 header: Impressum 
-permalink: impressum.html
 ---
 {% include JB/setup %}
 

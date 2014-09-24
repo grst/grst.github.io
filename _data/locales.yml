@@ -1,0 +1,37 @@
+de:
+    nav_left:
+    - text:         "Start"
+      url:          "/index.html"
+    - text:         "Über mich"
+      url:          "/about.html"
+    - text:         "Leistungen"
+      url:          "/services.html"
+    nav_right:
+    - text:         "Norwegen"
+      url:          "/norway.html"
+    - text:         "Projekte"
+      url:          "/projects.html"
+    - text:         "Kontakt"
+      url:          "/contact.html"
+    lang_message:   "Deutsch"
+    imprint: "Impressum"
+    rss_message:    "Nichts verpassen!"
+
+en:
+    nav_left:
+    - text:         "Home"
+      url:          "/en/index.html"
+    - text:         "About"
+      url:          "/en/about.html"
+    - text:         "Services"
+      url:          "/en/services.html"
+    nav_right:
+    - text:         "Norway"
+      url:          "/en/norway.html"
+    - text:         "Projects"
+      url:          "/en/projects.html"
+    - text:         "Contact"
+      url:          "/en/contact.html"
+    lang_message:   "English"
+    imprint: "imprint"
+    rss_message:    "Stay tuned!"

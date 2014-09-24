@@ -1,3 +1,10 @@
+{% comment %}On récupère la langue en fonction de l'URL{% endcomment %}
+{% capture locale %}{{ page.url | truncate: 3, "" | remove: "/" }}{% endcapture %}
+
+{% unless site.authorized_locales contains locale %}
+{% assign locale = site.default_locale %}
+{% endunless %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,16 +59,20 @@
 
             <div class="navbar-collapse navbar-items navbar-items-left">
                 <ul class="nav navbar-nav">
-                    {% assign pages_list = site.pages %}
-                    {% assign group = 'nav_left' %}
-                    {% include JB/pages_list %}
+                    {% for link in site.data.locales[locale].nav_left %}
+                        <li{% if page.url == link.url %} class="active"{% endif %}>
+                            <a href="{{ link.url }}">{{ link.text }}</a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
             <div class="navbar-collapse navbar-items navbar-items-right">
                 <ul class="nav navbar-nav">
-                    {% assign pages_list = site.pages %}
-                    {% assign group = 'nav_right' %}
-                    {% include JB/pages_list %}
+                    {% for link in site.data.locales[locale].nav_right %}
+                        <li{% if page.url == link.url %} class="active"{% endif %}>
+                            <a href="{{ link.url }}">{{ link.text }}</a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
