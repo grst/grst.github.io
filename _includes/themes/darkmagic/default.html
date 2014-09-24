@@ -33,8 +33,8 @@
       -->
 
 <!-- atom & rss feed -->
-    <link href="{{ BASE_PATH }}{{ site.JB.atom_path }}" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
-        <link href="{{ BASE_PATH }}{{ site.JB.rss_path }}" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+<link href="{{ BASE_PATH }}{{ site.JB.atom_path }}" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+<link href="{{ BASE_PATH }}{{ site.JB.rss_path }}" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 </head>
@@ -55,25 +55,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-            </div>
 
-            <div class="navbar-collapse navbar-items navbar-items-left">
-                <ul class="nav navbar-nav">
-                    {% for link in site.data.locales[locale].nav_left %}
-                        <li{% if page.url == link.url %} class="active"{% endif %}>
-                            <a href="{{ link.url }}">{{ link.text }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="navbar-collapse navbar-items navbar-items-right">
-                <ul class="nav navbar-nav">
-                    {% for link in site.data.locales[locale].nav_right %}
-                        <li{% if page.url == link.url %} class="active"{% endif %}>
-                            <a href="{{ link.url }}">{{ link.text }}</a>
-                        </li>
-                    {% endfor %}
-                    <li class="dropdown">
+                <div class="dropdown langswitch">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
                         {% if locale == "de" %}
@@ -90,7 +73,25 @@
                         <li><a href="/en"><img class="flag" src="{% base64 assets/en.svg %}" />
                             english</a></li>
                     </ul>
+                </div>
+            </div>
+
+            <div class="navbar-collapse navbar-items navbar-items-left">
+                <ul class="nav navbar-nav">
+                    {% for link in site.data.locales[locale].nav_left %}
+                    <li{% if page.url == link.url %} class="active"{% endif %}>
+                    <a href="{{ link.url }}">{{ link.text }}</a>
                     </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="navbar-collapse navbar-items navbar-items-right">
+                <ul class="nav navbar-nav">
+                    {% for link in site.data.locales[locale].nav_right %}
+                    <li{% if page.url == link.url %} class="active"{% endif %}>
+                    <a href="{{ link.url }}">{{ link.text }}</a>
+                    </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>

@@ -1,12 +1,10 @@
 ---
 layout: page
 title: start 
-header: Willkommen
-tagline: auf meiner neuen Website.
+header: Welcome 
+tagline: on my new website
 ---
 {% include JB/setup %}
 
-Die Seite ist noch im Aufbau. Ich werde über den Fortschritt unter [Projekte](/projekte.html) berichten. 
+This page is still under construction. The progress will be documented in my [tech blog](/projekte.html).
 
-### Norwegen
-Aktuelle Berichte, Gedanken und Erfahrungen zu meinem ERASMUS-Auslandssemester in Norwegen werde ich [hier](/norwegen.html) veröffentlichen. 

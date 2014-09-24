@@ -27,8 +27,6 @@ en:
     - text:         "services"
       url:          "/en/services.html"
     nav_right:
-    - text:         "norway"
-      url:          "/en/norway.html"
     - text:         "projects"
       url:          "/en/projects.html"
     - text:         "contact"

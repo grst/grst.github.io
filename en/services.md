@@ -1,7 +1,7 @@
 ---
 layout: page
-title: leistungen 
-header: Leistungen 
+title: Services 
+header: Services 
 ---
 {% include JB/setup %}
 
