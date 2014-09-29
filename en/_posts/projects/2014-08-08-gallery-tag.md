@@ -19,7 +19,7 @@ Since I will soon begin to write some posts about my ERASMUS-Exchange to Trondhe
 However, as always, things turned out not to be as easy as expected.
 
 ## Issues I encountered
-* Since I am using cygwin on Windows (don't blame me - it turned out to be the most productive combination so far), it was quite a pain to get the RMagick libary installed. What finally helped was downloading the *right* ImageMagick packages as described in the [RMagick wiki](https://github.com/rmagick/rmagick/wiki/Installing-on-Cygwin-(Windows)), using a 1.8.x version of Ruby Gem instead of the latest 2.4.1 release and to symlink the folder
+* Since I am using cygwin on Windows (don't blame me - it turned out to be the most productive combination so far), it was quite a pain to get the RMagick libary installed. What finally helped was downloading the *right* ImageMagick packages as described in the [RMagick wiki](https://github.com/rmagick/rmagick/wiki/Installing-on-Cygwin-(Windows)), using RMagick 2.13.1, using a 1.8.x version of Ruby Gem instead of the latest 2.4.1 release and to symlink the folder
 `/cygdrive/c/cygwin/usr/include/ImageMagick/wand` to `/cygdrive/c/cygwin/user/include/wand` 
 * The version of JekyllGalleryTag as provided on github is not compatible with the current version of jekyll. Although the thumbnails in `_site` were generated, they were later overwritten. I found out that this behaviour was fixed in the [fork by internaut](https://github.com/internaut/JekyllGalleryTag) while providing some nice additional features. 
 * I had to modifiy the html-output of the plugin to generate responsive bootstrap-thumbnails. Now the width and number of thumbs per line is adjusted depending of the browser size. 

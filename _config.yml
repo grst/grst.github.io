@@ -3,7 +3,7 @@
 permalink: /:categories/:year/:month/:day/:title 
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-highlighting: pygments
+highlighting: rouge 
 
 markdown : kramdown
 excerpt_separator: <!--more--> 
@@ -11,7 +11,6 @@ excerpt_separator: <!--more-->
 # so be sure to set them if your theme uses them.
 #
 title : Gregor Sturm 
-tagline: Site Tagline
 author :
   name : Gregor Sturm
   email : mail@gregor-sturm.de 
@@ -134,7 +133,5 @@ gallerytag:
     thumb_height: 300 
     columns: 0
 
-pageinate_per_category: true
-default_category: "de"
 default_locale:     "de"
 authorized_locales: ["de", "en"]
