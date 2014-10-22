@@ -9,4 +9,4 @@ tagline: auf meiner neuen Website.
 Die Seite ist noch im Aufbau. Ich werde über den Fortschritt unter [Projekte](/en/projects.html) berichten. 
 
 ### Norwegen
-Aktuelle Berichte, Gedanken und Erfahrungen zu meinem ERASMUS-Auslandssemester in Norwegen werde ich [hier](/norwegen.html) veröffentlichen. 
+Aktuelle Berichte, Gedanken und Erfahrungen zu meinem ERASMUS-Auslandssemester in Norwegen werde ich [hier](/norway.html) veröffentlichen. 
