@@ -1,6 +1,5 @@
 ---
 layout: post
-category : projects 
 tags : [jekyll]
 ---
 {% include JB/setup %}
