@@ -1,16 +1,18 @@
-<div class="page-header">
-  <h1>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
-</div>
-
-<div class="row-fluid post-full">
-  <div class="span12">
-    <div class="date">
-      <span>{{ page.date | date_to_long_string }}</span>
-    </div>
+<div class="container">
     <div class="content">
-      {{ content }}
-    </div>
- <!--
+        <div class="page-header">
+            <h1>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
+        </div>
+
+        <div class="row-fluid post-full">
+            <div class="span12">
+                <div class="date">
+                    <span>{{ page.date | date_to_long_string }}</span>
+                </div>
+                <div class="content">
+                    {{ content }}
+                </div>
+                <!--
   {% unless page.categories == empty %}
     <ul class="tag_box inline">
       <li><i class="icon-folder-open"></i></li>
@@ -27,22 +29,24 @@
     </ul>
   {% endunless %}  
 -->
-    <hr>
-    <div class="pagination container center-block">
-      {% if page.cat_prev %}
-        <a class="btn btn-default" href="{{ BASE_PATH }}{{ page.cat_prev.url }}" title="{{ page.cat_prev.title }}">&larr; Previous</a>
-      {% else %}
-       <a class="btn btn-default disabled">&larr; Previous</a>
-      {% endif %}
-      <!-- <a href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Archive</a></li> -->
-      {% if page.cat_next %}
-       <a class="btn btn-default" href="{{ BASE_PATH }}{{ page.cat_next.url }}" title="{{ page.cat_next.title }}">Next &rarr;</a>
-      {% else %}
-       <a class="btn btn-default disabled">Next &rarr;</a>
-      {% endif %}
-      </ul>
+                <hr>
+                <div class="pagination container center-block">
+                    {% if page.cat_prev %}
+                    <a class="btn btn-default" href="{{ BASE_PATH }}{{ page.cat_prev.url }}" title="{{ page.cat_prev.title }}">&larr; Previous</a>
+                    {% else %}
+                    <a class="btn btn-default disabled">&larr; Previous</a>
+                    {% endif %}
+                    <!-- <a href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Archive</a></li> -->
+                    {% if page.cat_next %}
+                    <a class="btn btn-default" href="{{ BASE_PATH }}{{ page.cat_next.url }}" title="{{ page.cat_next.title }}">Next &rarr;</a>
+                    {% else %}
+                    <a class="btn btn-default disabled">Next &rarr;</a>
+                    {% endif %}
+                </ul>
+            </div>
+            <hr />
+            {% include JB/comments %}
+        </div>
     </div>
-    <hr />
-    {% include JB/comments %}
-  </div>
+</div>
 </div>
