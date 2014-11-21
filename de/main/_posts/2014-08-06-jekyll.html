@@ -1,0 +1,16 @@
+---
+layout: post
+title: Jekyll 
+thumb: 2014-08-06_jekyll/jekyll.jpg
+---
+
+Für den Blog über mein Auslandssemester in Norwegen hatte ich endlich einen Anlass meine Website in Angriff zu nehmen. Dabei habe ich mich anstatt von wordpress oder anderen Content Management Systemen für den Textprozessor <a href"http://jekyllrb.com/">Jekyll</a> entschieden.<!--more--> Beiträge kann ich bequem in Markdown mit einem Texteditor meiner Wahl schreiben und dann mit einem simplen <code>jekyll build</code> zu einer statischen website kompilieren.  
+
+Hier sind einige technische Details über den Entstehungsprozess (insb. Probleme und Workarounds) aufgelistet. 
+
+{% for post in site.categories.jekyll %}
+<h2 class="post-title"><a href="{{ post.url }}">{{ post.title   }}</a></h2>
+<p class="post-meta">{{ post.date | date_to_string }}</p>
+<p class="post-excerpt">{{ post.excerpt | strip_html            }}&hellip; (<a href="{{ post.url }}">Weiterlesen</a>)</p>
+{% endfor %}
+
