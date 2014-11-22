@@ -6,7 +6,7 @@ thumb: 2012-11-25_klick-xmedia/logo_klick.jpg
 ---
 
 [Crossmedia](http://www.crossmedia-festival.de/index.php) ist ein Multimedia-Wettbewerb für Schüler an bayerischen Schulen, der jedes Jahr von der [LAG neue medien](http://lag.crossmedia-festival.de/) ausgerichtet wird. Jedes Jahr im November werden alle Teilnehmer zur Preisverleihung in die Landesbausparkasse in München eingeladen. Dort gibt es immer -- neben einem legendären Chilli con Carne -- beeindruckende Beiträge aus den Sparten Grafikdesign, Musikdesign, Sprache/Text, Webdesign,
-Games, 3D und Kurzfilm zu bestaunen, die von TV Moderator Markus Othmer auf amüsante Weise präsentiert werden. 
+Games, 3D und Kurzfilm zu bestaunen<!--more-->, die von TV Moderator Markus Othmer auf amüsante Weise präsentiert werden. 
 
 ## Das Projekt 
 Die Website des [Kleinkunstvereins KLICK](http://www.klick-immenstadt.de/index.php?section=ueber_uns) ist für mich schon seit langem eine Möglichkeit neue Sachen auszuprobieren. Bereits [2004](http://www.klick-immenstadt.de/_bis2004/), als ich meine ersten Schritte in HTML wagte, war diese Seite mein erstes "Projekt". Auch als ich in die (Web-)Programmierung mit PHP einstieg, erarbeitete ich mir meine Kenntnisse, indem ich ein eigenes CMS für den Verein auf
