@@ -2,7 +2,17 @@
 <html lang="{{ locale }}">
 <head>
 <meta charset="utf-8">
-<title>Gregor Sturm - {{ page.header }}</title>
+<title>
+    Gregor Sturm
+    {% if page.title %}
+        - 
+        {% if page.header %}
+           {{ page.header }}
+        {% else %}
+            {{ page.title }}
+        {% endif %}
+    {% endif %}
+</title>
 {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
 <meta name="author" content="{{ site.author.name }}">
 
