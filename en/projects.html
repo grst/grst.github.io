@@ -1,0 +1,22 @@
+---
+layout: page
+title: Projects 
+header: Projects
+---
+{% include JB/setup %}
+
+{% for post in site.categories.en %}
+{% if post.categories contains 'main' %}
+<div class="row">
+    <div class="col-md-3 col-sm-3 blogthumb hidden-xs">
+        <a href="{{ post.url }}">
+            <img class="thumbnail" src="/{{ BASE_PATH}}{{ site.gallerytag.destination_dir}}/{{ post.thumb | replace: '.jpg','-thumb.jpg'}}" />
+        </a>
+    </div>
+    <div class="post-excerpt col-md-9 col-sm-9 col-xs-12">
+        <h2 class="post-title"><a href="{{ post.url }}">{{      post.title }}</a></h2>
+        <p class="post-meta">{{ post.date | date_to_string }}</p>
+        {{ post.excerpt | strip_html }}&hellip; (<a href="{{    post.url }}">read more</a>)</div>
+</div>
+{% endif %}
+{% endfor %}
