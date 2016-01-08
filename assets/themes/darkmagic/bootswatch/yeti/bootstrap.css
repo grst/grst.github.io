@@ -6226,27 +6226,6 @@ body {
   height: 28px;
   z-index: -1;
 }
-.navbar .langswitch {
-  width: 50px;
-  right: 23px;
-  margin-top: 19px;
-  position: absolute;
-}
-.navbar .langswitch .dropdown-toggle {
-  color: #fff;
-}
-.navbar .langswitch .dropdown-menu {
-  left: -50px;
-}
-.navbar .langswitch .dropdown-menu span {
-  position: relative;
-  top: 2px;
-  left: 7px;
-}
-.navbar .langswitch img.flag {
-  width: 30px;
-  height: 20px;
-}
 .navbar-items {
   float: left;
   position: absolute;
@@ -6260,35 +6239,7 @@ body {
   left: 53%;
   margin-left: 80px;
 }
-@media (max-width: 1070px) and (min-width: 888px) {
-  .navbar .langswitch {
-    width: 80px;
-    right: 0;
-    padding-bottom: 3px;
-    padding-left: 15px;
-    margin-top: 75px;
-    position: absolute;
-    background-color: #333333;
-  }
-  .navbar.shrink .langswitch {
-    margin-top: 50px!important;
-  }
-}
 @media (max-width: 888px) {
-  .navbar .langswitch {
-    margin-left: 23px;
-    position: static;
-    right: auto;
-    background: none;
-    margin-top: 23px;
-    width: 60px;
-    padding: 0;
-  }
-  .navbar .langswitch .dropdown-menu {
-    left: 0;
-    top: 65px;
-    position: absolute;
-  }
   .navbar.collapse .navbar-items {
     display: none;
   }
@@ -6365,9 +6316,6 @@ body {
 }
 .navbar.shrink .navbar-toggle {
   margin-top: 12px;
-}
-.navbar.shrink .langswitch {
-  margin-top: 8px;
 }
 .navbar.shrink .root-caption {
   display: none;

@@ -55,27 +55,6 @@ body {
         height: 28px;
         z-index: -1;
     }
-    .langswitch {
-        width: 50px;
-        right: 23px;
-        margin-top: 19px;
-        position: absolute;
-        .dropdown-toggle {
-            color: #fff;
-        }
-        .dropdown-menu {
-            left: -50px;
-            span {
-                position: relative;
-                top: 2px;
-                left: 7px;
-            }
-        }
-        img.flag { 
-            width: 30px;
-            height: 20px;
-        }
-    }
 }
 .navbar-items {
     float: left;
@@ -91,38 +70,8 @@ body {
         margin-left: 80px;
     }
 }
-@media (max-width: @grid-float-breakpoint-lg) and (min-width: @grid-float-breakpoint) {
+@media (max-width: @grid-float-breakpoint) { 
     .navbar {
-        .langswitch {
-            width: 80px;
-            right: 0;
-            padding-bottom: 3px;
-            padding-left: 15px;
-            margin-top: 75px;
-            position: absolute;
-            background-color: @navbar-default-bg; 
-        }
-        &.shrink .langswitch {
-            margin-top: 50px!important;
-        }
-    }
-}
- @media (max-width: @grid-float-breakpoint) { 
-    .navbar {
-        .langswitch { 
-            margin-left: 23px;
-            position: static;
-            right: auto;
-            background: none;
-            margin-top: 23px;
-            width: 60px;
-            padding: 0;
-            .dropdown-menu {
-                left: 0;
-                top: 65px;
-                position: absolute;
-            }
-        }
         &.collapse{ 
             .navbar-items{
                 display: none;
@@ -195,9 +144,6 @@ body {
 .navbar.shrink {
     .navbar-toggle {
         margin-top: 12px;
-    }
-    .langswitch {
-        margin-top: 8px; 
     }
     .root { 
         &-caption {
