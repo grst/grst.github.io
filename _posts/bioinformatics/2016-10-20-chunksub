@@ -1,0 +1,76 @@
+----
+title: HPC made easy with *chunksub*
+----
+
+When working in bioinformatics, you always reach the point where you realize: Damn, it's not possible to run my analysis on the whole data set on my local laptop. We need to parallelize. 
+
+The beauty of most bioinfo analyses is that they are fairly easy to parallelize. Often, you have a list of input arguments (e.g. a list of files, GEO identifiers, chromosomes, ...) and execute a script running your analysis on each line. 
+
+In the easiest case, this is done using `xargs`:
+
+```
+xargs my_analysis.py < identifiers.txt
+```
+
+This will run in a single thread though. 
+
+One step up is using gnu `parallel`. It's easy. Basically everything you can do with xargs you can also do with parallel, only, well, *in parallel*. 
+
+```
+parallel my_analysis.py -j 16 < identifiers.txt
+```
+
+Likely, this will not be enough though.
+
+Therefore, I was looking for the next "step up": running the analysis on a `qsub` based High Performance Cluster (HPC). 
+
+Technically, you can also use parallel in combination with ssh to distribute the work on multiple nodes, but why should I want to do so, if I have access to a HPC where the schedules takes care of that. 
+
+Surprisingly, it did not turn out to be that easy. Of course, I could do
+```
+xargs -I"{}" qsub "my_analysis.py {}" < identifiers.txt
+```
+However, this causes a lot of overhead for transferring and starting the jobs, loading all the required libraries, etc. when one analysis is done fairly quickly but you have a shedload of identifiers. 
+
+I wanted something as simple as `parallel`, only for qsub. 
+
+Searching github pointed me on `chunksub` by .... which promised to be exactely to be what I was looking for. 
+
+Playing around with it, I found that it met my usecase to a large extent and I needed to do only some modifications to it to make if practical for me. 
+
+### Improving chunksub
+This is what I did. 
+
+* ... 
+* Compatibility with sge and torque via magic commands
+* creating a PyPi package
+
+Now, it's really simple: 
+```
+chunksub my_analysis.py < identifiers.txt
+```
+
+identifiers will now be split into chunks and sent to the nodes where xargs can be simply applied to every chunk again. 
+
+### Reducing the overhead even more by reading chunks directly
+
+One can now argue, that by using xargs for invoking the python script 
+for every identifier causes a big overhead again, as the libraries need to be imported on every script run. This is even more important when running R-scripts, where library loading can make up quite a substantial part of the runtime of your script. 
+
+Therefore, you might want to adapt your script to read a chunk file directly and run the analysis in a loop: 
+
+```
+with open(sys.argv[1]) as chunkfile: 
+    for line in chunkfile.readlines(): 
+        doAnalysis(line)
+```
+
+// that part should go on github, also 
+In that case, you can create a new template for chunked jobs, so that you can again simply invoke chunksub
+```
+chunksub my_analysis_reading_chunks.py < identifiers.txt
+
+
+
+
+
