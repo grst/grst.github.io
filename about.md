@@ -1,10 +1,9 @@
 ---
 layout: page
-title: über mich 
-header: Über mich 
+title: about me 
 group: navleft
 weight: 20
 ---
 {% include JB/setup %}
 
-folgt in Kürze...
+I'm a Munich-based bioinformatics student...
