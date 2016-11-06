@@ -2,7 +2,7 @@ clean:
 	rm -rfv _site
 
 all: 
-	jekyll build
+	bundle exec jekyll build	
 
 serve:
-	jekyll serve
+	bundle exec jekyll serve
