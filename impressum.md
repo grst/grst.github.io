@@ -5,11 +5,11 @@ header: Impressum
 ---
 
 ## Verantwortlichkeit
-    Gregor Sturm Computerdienstleistungen
-    Alte Dorfstr. 9
-    87509 Immenstadt
-    Steuernummer: 123/279/20055
-    E-Mail: mail(at)gregor-sturm.de
+Gregor Sturm Computerdienstleistungen<br />
+Alte Dorfstr. 9<br />
+87509 Immenstadt<br />
+Steuernummer: 123/279/20055<br />
+E-Mail: mail(at)gregor-sturm.de<br />
 
 ## Haftungsausschluss
 
