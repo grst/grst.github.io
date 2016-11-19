@@ -25,7 +25,7 @@ github_username: grst
 
 # Build settings
 markdown: kramdown
-theme: pithy
+theme: minima
 gems:
     - jekyll-feed
 exclude:
