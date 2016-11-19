@@ -1,0 +1,22 @@
+{% comment %}
+----------------------------------------------------------
+This sniplet serves for adding images to a jekyll post
+while adding a link to the image. 
+
+USAGE:
+In frontmatter assing:
+my_gallery:
+    - "path/to/img01.jpg::Image Description 1"
+    - "path/to/img02.jpg::Image Description 2" 
+    - ...
+
+In the document use:
+{% include gallery.snip imgs=page.my_gallery %}
+----------------------------------------------------------
+{% endcomment %}
+
+<div class="row gallery">
+{% for img in include.imgs %}{% assign a_imgs = img | split: "::" %}<div class="col-md-6 col-sm-6 col-xs-6"><a href="{{ a_imgs[0] }}" class="img-thumbnail" style="background-image: url('{{ a_imgs[0] }}'" title="{{ a_imgs[1] }}">
+</a></div>{% endfor %}
+</div>
+<p><br /></p>

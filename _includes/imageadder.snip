@@ -1,0 +1,12 @@
+{% comment %}
+----------------------------------------------------------
+This sniplet serves for adding images to a jekyll post
+while adding a link to the image. 
+
+USAGE:
+{% include imageadder.snip img="/path/to/img.jpg::Image Descritption" %}
+----------------------------------------------------------
+{% endcomment %}
+
+{% assign a_imgs = include.img | split: "::" %}
+[![{{a_imgs[1]}}]({{a_imgs[0]}})]({{a_imgs[0]}})
