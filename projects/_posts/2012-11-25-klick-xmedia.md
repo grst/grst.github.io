@@ -3,6 +3,7 @@ layout: post
 title: Crossmedia 2012
 tagline: Website for KLICK, a cultural association
 thumb: 2012-11-25_klick-xmedia/logo_klick.jpg
+category: test
 ---
 
 [Crossmedia](http://www.crossmedia-festival.de/index.php) is a multimedia contest for students of bavarian schools that is organised by the [LAG neue medien](http://lag.crossmedia-festival.de/). Every november, all participants are intived to the headquarter of the "Landesbausparkasse" in Munich. There, a great variety of amazing contributions from the field of graphic design, music design, literature, web design, games, 3D-Animations and short movies is
