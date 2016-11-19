@@ -16,7 +16,7 @@ In the document use:
 {% endcomment %}
 
 <div class="row gallery">
-{% for img in include.imgs %}{% assign a_imgs = img | split: "::" %}<div class="col-md-6 col-sm-6 col-xs-6"><a href="{{ a_imgs[0] }}" class="img-thumbnail" style="background-image: url('{{ a_imgs[0] }}'" title="{{ a_imgs[1] }}">
+{% for img in include.imgs %}{% assign a_imgs = img | split: "::" %}<div class="col-md-6 col-sm-6 col-xs-12"><a href="{{ a_imgs[0] }}" class="img-thumbnail" style="background-image: url('{{ a_imgs[0] }}'" title="{{ a_imgs[1] }}">
 </a></div>{% endfor %}
 </div>
 <p><br /></p>
