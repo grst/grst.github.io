@@ -132,6 +132,10 @@ li {
     line-height: 0;
 }
 
+.post-content {
+    margin-top: 10px;
+}
+
 .page-content {
 	min-height: 100%;
 	height: 100%;
@@ -141,6 +145,7 @@ li {
 	color: #666;
 	font-size: 12px;
 	margin-left: 0px;
+    margin-top: 5px;
 }
 .content {
 	margin-top: 10px;
@@ -165,6 +170,12 @@ li {
 
 .post-list li a.post-link {
     color: #15265F;
+}
+
+.post {
+    h1, h2, h3 {
+        color: #15265F;
+    }
 }
 
 /**
