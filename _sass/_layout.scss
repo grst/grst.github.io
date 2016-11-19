@@ -7,12 +7,16 @@ html,body {
  */
 .header {
     padding: 50px 20px 40px;
-    background-color: #515865;
+    background-color: #333333;
 }
 
 .header-container {
     max-width: 700px;
     margin: 0px auto;
+}
+
+.nav-left {
+    float: left;
 }
 
 .nav {
@@ -52,39 +56,55 @@ li {
 }
 
 .nav li a:hover {
-    opacity: 0.6;
+    color: #fff;
     cursor: pointer;
     text-decoration: none;
 }
 
-.title li a {
+.logo {
+  height: 60px;
+  text-align: right;
+}
+@media (min-width:600px) {
+    .logo {
+        height: 100px;
+    }
+}
+
+.logo img {
+  max-height: 100%;
+}
+
+.header li a {
+    color: #999;
+    text-decoration: none
+}
+
+.header .title li a {
     color: #FFF;
 }
 
-.title li a:link {
-    color: #FFF;
-}
-
-.title li a:visited {
-    opacity: 1;
+.header li a:visited {
     transition: all 0.15s linear 0s;
     text-decoration: none;
 }
 
-.title li a:hover {
+.header li a:hover {
+    transition: all 0.15s linear 0s;
     opacity: 1;
-    color: #FFF;
+    color: #85A0CE;
 }
 
 .description {
     padding-top: 10px;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.5em;
     color: #EEE;
+    font-style: oblique;
 }
 
 .social-links {
-    padding-top: 10px;
+    padding-top: 14px;
 	margin-left: 0px;
 }
 
@@ -92,18 +112,6 @@ li {
     display: inline;
     padding-right: 10px;
     line-height: 0;
-}
-
-.social-links a {
-    color: #959BA6;
-}
-
-.social-links a:active {
-	opacity: 0.6;
-}
-
-.social-links a:hover {
-	opacity: 0.6;
 }
 
 .page-content {
