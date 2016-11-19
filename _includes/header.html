@@ -1,32 +1,11 @@
 <header class="header">
     <div class="header-container">
-        <div class="nav-left">
+        <div class="row">
+        <div class="col-md-8">
             <div class="nav">
-                {% if page.path == "index.html" %}
-                <span class="title">
-                    <li>
                     <a href="/index.html">home</a>
-                    </li>
-                </span>			
-                {% else %}
-                <li>
-                <a href="/index.html">home</a>
-                </li>			
-                {% endif %}
-                {% if page.path == "about.html" %}
-                <span class="title">
-                    <li>
                     <a href="/about.html">about</a>
-                    </li>
-                </span>			
-                {% else %}
-                <li>
-                <a href="/about.html">about</a>
-                </li>			
-                {% endif %}
-                <li>
-                <a href="http://ut.gregor-sturm.de">⟨ ut ⟩</a>
-                </li>
+                    <a href="http://ut.gregor-sturm.de">⟨ ut ⟩</a>
             </div>
             <div class="description"> {{ site.motto }} </div>		
             <ul class="social-links">
@@ -52,10 +31,11 @@
                 </li>
             </ul>	
         </div>
-        <div class="nav-right">
+        <div class="col-md-4">
             <div class="logo">
                 <img src="/assets/img/gregorsturm.png" alt="logo"/>
             </div>
         </div>
+    </div>
     </div>
 </header>

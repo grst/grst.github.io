@@ -2,21 +2,33 @@ html,body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+html {
+    min-height:100%;
+}
+
 /**
  * Header
  */
+hr {
+    margin-top: 0!important;
+    margin-bottom: 0!important;
+    border: 1px solid #ccc;
+}
+
+a {
+    cursor: pointer;
+}
+
 .header {
-    padding: 50px 20px 40px;
+    padding-top: 50px;
+    padding-bottom: 40px;
     background-color: #333333;
 }
 
 .header-container {
     max-width: 700px;
-    margin: 0px auto;
-}
-
-.nav-left {
-    float: left;
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
 .nav {
@@ -63,7 +75,7 @@ li {
 
 .logo {
   height: 60px;
-  text-align: right;
+  text-align: center;
 }
 @media (min-width:600px) {
     .logo {
@@ -125,13 +137,14 @@ li {
 	margin-left: 0px;
 }
 .content {
-	margin-top: 20px;
+	margin-top: 10px;
 	color: #666;
 	font-size: 14px;
 }
 
 .post-list {
 	list-style:none;
+    margin-left: 0;
 }
 
 .post-list li h3 {
@@ -146,11 +159,6 @@ li {
 
 .post-list li a.post-link {
     color: #15265F;
-}
-
-#line {
-	opacity: 0.1;
-	color: #000;
 }
 
 /**
@@ -198,8 +206,11 @@ li {
     font-size: 11px;
     text-align: center;
 	color: #666;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
 }
-
 #gotop {
     position: fixed;
     right: 20px;
