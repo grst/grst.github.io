@@ -17,19 +17,15 @@ The current version of the site is based on a couple of home-brewed php-classes 
 
 The design is kept in the association's colors blue and yellow. The slow movement of the picture sidebar tries on the one hand, to draw the attention to the current events, on the other hand not to distract too much from the main page content. The content pages are kept clear-structured and functional. 
 
-{% gallery klickbe %}
 2012-11-25_klick-xmedia/backend/be01.jpg
 2012-11-25_klick-xmedia/backend/be02.jpg::seat booking system
 2012-11-25_klick-xmedia/backend/be03.jpg::event planning checklist
 2012-11-25_klick-xmedia/design/01.jpg
 2012-11-25_klick-xmedia/design/02.jpg
-{% endgallery %}
 
 ## Pricing ceremony
 With this project, I won the 800€ endowed first prize in the section "Internet". The [jury praised](http://www.crossmedia-festival.de/index.php?option=com_content&view=article&id=85&Itemid=86) the niche interplay of shapes, colors and contents. The design puts the content in the centre but remains noticeable in an ingenious way.  
 
-{% gallery siegerehrung %}
 2012-11-25_klick-xmedia/siegerehrung/gruppenfoto.jpg::The winners of all sections
 2012-11-25_klick-xmedia/siegerehrung/siegerfoto.jpg
-{% endgallery %}
 

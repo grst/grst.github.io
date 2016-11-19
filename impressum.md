@@ -3,7 +3,6 @@ layout: page
 title: Impressum 
 header: Impressum 
 ---
-{% include JB/setup %}
 
 ## Verantwortlichkeit
     Gregor Sturm Computerdienstleistungen
