@@ -4,7 +4,7 @@ title: TBG - The Bioinformatics Game
 ---
 
 
-"Write a game that has something todo with Bioinformatics". That was everything they said to us. They -- that's the [rostlab](https://rostlab.org). Us -- that's me and [Sebastian Wilzbach](http://seb.wilzba.ch), one of my fellow students. So we went to tackle this incredibly specific task and well, this is what we ended up with: 
+"Write a game that has something to do with Bioinformatics". That was everything they said to us. They -- that's the [rostlab](https://rostlab.org). Us -- that's me and [Sebastian Wilzbach](http://seb.wilzba.ch), one of my fellow students. So we went to tackle this incredibly specific task and well, this is what we ended up with: 
 
 ![Screenshot of the game](/assets/projects/2014-01-16_tbg/tbg-phone.png)
 
