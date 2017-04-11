@@ -1,6 +1,6 @@
 ---
 layout: post
-title: First prize for one of my projects at the Crossmedia-Festival 
+title: klick-immenstadt.de wins first prize at the Crossmedia contest 
 tagline: Website for KLICK, a cultural association
 gallery_backend:
     - /assets/projects/2012-11-25_klick-xmedia/be01.jpg::event management
