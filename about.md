@@ -3,9 +3,10 @@ layout: page
 title: About
 ---
 
-Hi, 
+I am a PhD student at the [Divison of
+Bioinformatics](https://icbi.i-med.ac.at/) of the [Medical University of
+Innsbruck](https://www.i-med.ac.at/mypoint/index.xml.en), Austria.
 
-I am a Bioinformatics master student based in Munich, Germany 
-with a special interest in Genomics and Epigenetics and scientific computing. 
-
-On this page I share news about my (not only) Bioinformatics projects. 
+I integrate and analyse single cell RNA-seq data from tumor samples
+to better understand how the immune system can be leveraged for
+innovative cancer treatments.
