@@ -3,26 +3,41 @@ layout: post
 title: A Fully Reproducible Data Analysis Workflow Using Notebooks and Nextflow 
 ---
 
-In this post I will describe a data-analysis workflow that helps to address the challenges that I face as a computational biologist. 
+In this post I will describe a data-analysis workflow that helps to 
+address the challenges that I face as a computational biologist. 
 
-The workflow should: 
 
- * be fully reproducible, including the software packages
- * be language agnostic (I tend to switch between R and python depending on the task and sometimes need to execute standalone programs in between) 
- * be executable on a high performance cluster (HPC)
- * support caching  (only re-execute parts that have changed) 
- * automatically generate reports and deploy them as a website (no error-prone, manual creating of reports) 
+1. **Ensure full reproducibility down to the exact versions of software used.**
+   Irreproducibility of results is a [major problem in science]() and I
+   can tell from own experience that it is a pain to get scripts of
+   other people to run that did not carfully define their envirments. 
+2. **Support mixing of R, Python and Shell commands.** Whether R or Python is
+   best often depends on the task. So I like switching between them. Also, using 
+   well-established shell-programs often makes life easier. 
+3. **Support execution onf a high performance cluster (HPC).** While I can
+   execute most of my analyses on a single high-memory node it is always nice
+   to be scaleable. 
+4. **Automatically only re-execute modified parts.** Some steps can be
+   computationally expensive, so it would be nice not having to execute them
+   every time I fix a typo in the final report. 
+5. **Automatically generate reports and deploy them as a website.** A 
+   non-negigible part of our work is to present the results to a 
+   non-technical audience (that's usually Molecular Biologists) which 
+   usually involves copying and pasting figures to a word document
+   that is sent around by email -- a process that is error-prone and leads 
+   to [outdated versions floating around](https://xkcd.com/1459/). 
 
 
 I achieve this by tying together two well estabilshed technologies: Jupyter or Rmarkdown notebooks on the one hand and the pipelining engine Nextflow on the other hand. 
 
 
+## Notebooks alone are note enough
 Notebooks are very popular among data scientists and they are a great tool to make analyses available to others. They have a few downsides. Reproducibility is not given, 
 if you don't make the exact software packages available to run the notebooks. 
-They have been critizised for being 'non-linear' which I think [doesn't matter if you re-execute them in a clean environment to generate a report](). 
+They have been [critizised for being 'non-linear']() which I think [doesn't matter if you re-execute them in a clean environment to generate a report](). 
 Also, jupyter notebooks don't allow for fine-grained output control to generate publication-ready reports (imagine I generate a report for a biologist: he is only interested in the plots and their 
 interpretation and not the code that generated them. 
-And, many analyses consist of multiple steps that need to be tied together somehow. 
+And, many analyses consist of multiple steps that depend on previous ones and they somehow need to be tied together. 
 
 There are the excellent [bookdown]() and [jupyter book]() projects that address these points to a certain extent. They allow to chain together multiple Rmarkdown documents or jupyter notebooks
 into a single report. I used bookdown [in a former project]() and even though it made a nice report, it felt somewhat unflexible: 
