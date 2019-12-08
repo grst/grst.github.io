@@ -3,48 +3,76 @@ layout: post
 title: A Fully Reproducible Data Analysis Workflow Using Notebooks and Nextflow 
 ---
 
-In this post I will describe a data-analysis workflow that helps to 
-address the challenges that I face as a computational biologist. 
-
+In this post I will describe a data-analysis workflow I developed to  
+address the challenges that I face as a computational biologist:
 
 1. **Ensure full reproducibility down to the exact versions of software used.**
-   Irreproducibility of results is a [major problem in science]() and I
-   can tell from own experience that it is a pain to get scripts of
-   other people to run that did not carfully define their envirments. 
+   Irreproducibility of results is a [major problem in science](https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970).
+   I can tell from own experience that it is a pain to get other people's
+   scripts to run, if they did not carefully specify software requirements. 
 2. **Support mixing of R, Python and Shell commands.** Whether R or Python is
-   best often depends on the task. So I like switching between them. Also, using 
-   well-established shell-programs often makes life easier. 
-3. **Support execution onf a high performance cluster (HPC).** While I can
-   execute most of my analyses on a single high-memory node it is always nice
-   to be scaleable. 
+   better often depends on the particular task. Sometimes it's even 
+   preferable to run a command-line tool. Therefore, I want to be 
+   able to switch between languages. 
+3. **Automatic execution on a high performance cluster (HPC).** Manually writing
+   [job scripts](https://www.msi.umn.edu/content/job-submission-and-scheduling-pbs-scripts) 
+   is a pain, the workflow should take care of that automatically. 
 4. **Automatically only re-execute modified parts.** Some steps can be
    computationally expensive, so it would be nice not having to execute them
    every time I fix a typo in the final report. 
-5. **Automatically generate reports and deploy them as a website.** A 
-   non-negigible part of our work is to present the results to a 
-   non-technical audience (that's usually Molecular Biologists) which 
-   usually involves copying and pasting figures to a word document
+5. **Automatically generate reports and deploy them as a website.** 
+   A major part of my work is to opresent the results of my analyses 
+   to a non-technical audience (that's usually Molecular Biologists).
+   This usually involves copying and pasting figures to a word document
    that is sent around by email -- a process that is error-prone and leads 
    to [outdated versions floating around](https://xkcd.com/1459/). 
 
 
-I achieve this by tying together two well estabilshed technologies: Jupyter or Rmarkdown notebooks on the one hand and the pipelining engine Nextflow on the other hand. 
+I achieve this by tying together two well estabilshed technologies: 
+[Jupyter](https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/what_is_jupyter.html)
+and [Rmarkdown](https://rmarkdown.rstudio.com/) notebooks on the one hand and the
+pipelining engine [Nextflow](https://www.nextflow.io/) on the other hand. 
 
 
 ## Notebooks alone are note enough
-Notebooks are very popular among data scientists and they are a great tool to make analyses available to others. They have a few downsides. Reproducibility is not given, 
-if you don't make the exact software packages available to run the notebooks. 
-They have been [critizised for being 'non-linear']() which I think [doesn't matter if you re-execute them in a clean environment to generate a report](). 
-Also, jupyter notebooks don't allow for fine-grained output control to generate publication-ready reports (imagine I generate a report for a biologist: he is only interested in the plots and their 
-interpretation and not the code that generated them. 
-And, many analyses consist of multiple steps that depend on previous ones and they somehow need to be tied together. 
+Notebooks are widely used among data scientists and they are a great tool to make 
+analyses accessible. They are an obvious choice to form the basis
+of a reproducible workflow. However, notebooks alone have several shortcomings
+that we need to address. 
 
+First, just using notebooks does not ensure reproducibility of your code. 
+The excact software libraries used must be documented. Moreover, 
+jupyter notebooks have been [critizised for allowing a 'non-linear'
+workflow](https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/preview#slide=id.g362da58057_0_1)
+that can lead to hidden states. The former can be addressed using [conda
+environments]() or [docker containers](). The latter can be addressed by
+re-executing the entire notebooks from scratch as explained in this [excellent
+post by Yihui Xie](https://yihui.org/en/2018/09/notebook-war/) on what he calls
+"the first notebook war". 
+
+Second, jupyter notebooks don't allow for fine-grained output control. 
+Also, jupyter notebooks don't allow for fine-grained output control to generate publication-ready reports (imagine I generate a report for a biologist: he is only interested in the plots and their 
+interpretation and not the code that generated them. While Rmarkdown has already
+excellent support for this, this is something we need to work around 
+for jupyter notebooks. 
+
+Third, many analyses consist of multiple steps that depend on previous ones and they somehow need to be tied together.  
 There are the excellent [bookdown]() and [jupyter book]() projects that address these points to a certain extent. They allow to chain together multiple Rmarkdown documents or jupyter notebooks
 into a single report. I used bookdown [in a former project]() and even though it made a nice report, it felt somewhat unflexible: 
-
 * I can't mix Rmarkdown and jupyter notebooks (I could use python chunks within Rmarkdown with reticulate) 
 * I can't use standalone programs in between (I could call them from R/python, but what if they need to run hihgly parallelized on the cluster) 
 * Even though it supports caching, I kept re-executing the entire pipeline
+
+
+To address these points, I propse the following thigs: 
+
+* Re-execute all notebooks from command line and generate an HTML report. This ensures that there are no
+'hidden states' in the report. This can be achieved using Rmarkdown and and
+nbconvert. Below I will present a package I developed that facilitates this
+process and even supports fine-grained output-control for jupyter notebooks. 
+
+* Chain together individual notebooks using nextflow. Integrate all HTML files
+  into a single website that can be shared with collaborators. 
 
 
 ## Chaining notebooks with nextflow
