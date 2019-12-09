@@ -40,23 +40,26 @@ analyses accessible. They are an obvious choice to form the basis
 of a reproducible workflow. However, notebooks alone have several shortcomings
 that we need to address. 
 
-First, just using notebooks does not ensure reproducibility of your code. 
-The excact software libraries used must be documented. Moreover, 
-jupyter notebooks have been [critizised for allowing a 'non-linear'
-workflow](https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/preview#slide=id.g362da58057_0_1)
-that can lead to hidden states. The former can be addressed using [conda
-environments]() or [docker containers](). The latter can be addressed by
-re-executing the entire notebooks from scratch as explained in this [excellent
-post by Yihui Xie](https://yihui.org/en/2018/09/notebook-war/) on what he calls
-"the first notebook war". 
+1. **Using notebooks alone does not ensure reproducibility of your code.** The 
+   excact software libraries used must be documented. Moreover, jupyter
+   notebooks have been 
+   [critizised for containing hidden states](https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/preview#slide=id.g362da58057_0_1)
+   that hamper reproducibility. The former can be addressed using, for instance,
+   [conda environments](https://towardsdatascience.com/data-science-best-practices-python-environments-354b0dacd43a)
+   or [docker containers](https://towardsdatascience.com/docker-made-easy-for-data-scientists-b32efbc23165).
+   The latter can be addressed by re-executing the entire notebooks from scratch
+   in linear order as explained in this [excellent post by Yihui Xie](https://yihui.org/en/2018/09/notebook-war/). 
 
-Second, jupyter notebooks don't allow for fine-grained output control. 
-Also, jupyter notebooks don't allow for fine-grained output control to generate publication-ready reports (imagine I generate a report for a biologist: he is only interested in the plots and their 
-interpretation and not the code that generated them. While Rmarkdown has already
-excellent support for this, this is something we need to work around 
-for jupyter notebooks. 
+2. **Jupyter notebooks don't allow for fine-grained output control.**
+   A [feature of Rmarkdown](https://yihui.org/knitr/options/#text-results)
+   which I have been missing in the Jupyter world is 
+   to decide for each cell if I want to hide the input, the output or both. 
+   This is extremely helpful for generating publication-ready reports. Like 
+   that I don't have to scare the poor molecular biologist that has to read 
+   my report with 20 lines of `matplotlib` code but can rather show the 
+   plot only. 
 
-Third, many analyses consist of multiple steps that depend on previous ones and they somehow need to be tied together.  
+3. **Third, many analyses consist of multiple steps that depend on previous ones and they somehow need to be tied together.** 
 There are the excellent [bookdown]() and [jupyter book]() projects that address these points to a certain extent. They allow to chain together multiple Rmarkdown documents or jupyter notebooks
 into a single report. I used bookdown [in a former project]() and even though it made a nice report, it felt somewhat unflexible: 
 * I can't mix Rmarkdown and jupyter notebooks (I could use python chunks within Rmarkdown with reticulate) 

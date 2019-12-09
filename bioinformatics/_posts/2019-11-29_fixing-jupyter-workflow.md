@@ -20,7 +20,7 @@ Again, using jupytext, you can take advantage of, e.g. the [black pre-commit-hoo
 # Develop and test helper functions in a dedicated python module 
 > A colleague of mine once said when you work with jupyter notebooks you basically forget software engineering. 
 
-So just don't.  Yes, jupyter notebooks are a horrible tool to develop functions. But this is not what they are meant for. They are excellent for *executing* functions in order to explore and visualize data. 
+So just don't. I believe this is rather a matter of self-discipline than an inherent limitation of jupyter notebooks. Yes, jupyter notebooks are a horrible tool to develop functions. But this is not what they are meant for. They are excellent for *executing* functions in order to explore and visualize data. 
 
 To *develop* or other re-usable parts of software, just create a dedicated python module that you use alonside your notebooks. You can develop that in your favorite IDE, and write unit tests for it. 
 
