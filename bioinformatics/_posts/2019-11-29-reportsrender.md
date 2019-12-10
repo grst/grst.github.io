@@ -4,22 +4,32 @@ title: A Fully Reproducible Data Analysis Workflow Using Notebooks and Nextflow
 ---
 
 In this post I will describe a data-analysis workflow I developed to  
-address the challenges that I face as a computational biologist:
+address the challenges that I face as a computational biologist. 
+In the first section, I will explain the challenges and why they can't be solved
+with classical Rmarkdown and jupyter notebooks only. 
+Next, I will describe how I extend notebooks to a data science workflow. 
+If you are not interested in the technical details but want to get started with
+the workflow as quickly as possible, you can jump to section XXX and the
+[reportsrender documentation]() directly. 
 
 1. **Ensure full reproducibility down to the exact versions of software used.**
    Irreproducibility of results is a [major problem in science](https://www.nature.com/news/1-500-scientists-lift-the-lid-on-reproducibility-1.19970).
    I can tell from own experience that it is a pain to get other people's
-   scripts to run, if they did not carefully specify software requirements. 
+   scripts to run, if they did not carefully specify software requirements.
+
 2. **Support mixing of R, Python and Shell commands.** Whether R or Python is
    better often depends on the particular task. Sometimes it's even 
    preferable to run a command-line tool. Therefore, I want to be 
    able to switch between languages. 
+
 3. **Automatic execution on a high performance cluster (HPC).** Manually writing
    [job scripts](https://www.msi.umn.edu/content/job-submission-and-scheduling-pbs-scripts) 
    is a pain, the workflow should take care of that automatically. 
+
 4. **Automatically only re-execute modified parts.** Some steps can be
    computationally expensive, so it would be nice not having to execute them
    every time I fix a typo in the final report. 
+
 5. **Automatically generate reports and deploy them as a website.** 
    A major part of my work is to opresent the results of my analyses 
    to a non-technical audience (that's usually Molecular Biologists).
@@ -34,45 +44,70 @@ and [Rmarkdown](https://rmarkdown.rstudio.com/) notebooks on the one hand and th
 pipelining engine [Nextflow](https://www.nextflow.io/) on the other hand. 
 
 
-## Notebooks alone are note enough
+## Notebooks alone are not enough
 Notebooks are widely used among data scientists and they are a great tool to make 
 analyses accessible. They are an obvious choice to form the basis
-of a reproducible workflow. However, notebooks alone have several shortcomings
-that we need to address. 
+of my workflow. However, notebooks alone have several shortcomings
+that we need to address:
 
 1. **Using notebooks alone does not ensure reproducibility of your code.** The 
    excact software libraries used must be documented. Moreover, jupyter
    notebooks have been 
    [critizised for containing hidden states](https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/preview#slide=id.g362da58057_0_1)
-   that hamper reproducibility. The former can be addressed using, for instance,
-   [conda environments](https://towardsdatascience.com/data-science-best-practices-python-environments-354b0dacd43a)
-   or [docker containers](https://towardsdatascience.com/docker-made-easy-for-data-scientists-b32efbc23165).
-   The latter can be addressed by re-executing the entire notebooks from scratch
-   in linear order as explained in this [excellent post by Yihui Xie](https://yihui.org/en/2018/09/notebook-war/). 
+   that hamper reproducibility. 
 
 2. **Jupyter notebooks don't allow for fine-grained output control.**
    A [feature of Rmarkdown](https://yihui.org/knitr/options/#text-results)
-   which I have been missing in the Jupyter world is 
+   which I'm missing in the Jupyter world is 
    to decide for each cell if I want to hide the input, the output or both. 
    This is extremely helpful for generating publication-ready reports. Like 
-   that I don't have to scare the poor molecular biologist that has to read 
+   that I don't have to scare the poor molecular biologist who has to read 
    my report with 20 lines of `matplotlib` code but can rather show the 
    plot only. 
 
-3. **Third, many analyses consist of multiple steps that depend on previous ones and they somehow need to be tied together.** 
-There are the excellent [bookdown]() and [jupyter book]() projects that address these points to a certain extent. They allow to chain together multiple Rmarkdown documents or jupyter notebooks
-into a single report. I used bookdown [in a former project]() and even though it made a nice report, it felt somewhat unflexible: 
-* I can't mix Rmarkdown and jupyter notebooks (I could use python chunks within Rmarkdown with reticulate) 
-* I can't use standalone programs in between (I could call them from R/python, but what if they need to run hihgly parallelized on the cluster) 
-* Even though it supports caching, I kept re-executing the entire pipeline
+3. **Multi-step analyses require chaining of notebooks**. Clearly, 
+   it makes often sense to split up the workflow in multiple notebooks,
+   potentially switching between R and python between them.  
+   [Bookdown](https://bookdown.org/) and [jupyter book](https://jupyterbook.org/intro.html) 
+   have been developed to this end and allow the integration of
+   multiple Rmarkdown or jupyter notebooks respectively into a single
+   "book" document. I have 
+   [used bookdown previously](https://github.com/icbi-lab/immune_deconvolution_benchmark/) 
+   and while it is great in principle, I wasn't completely satisfied: 
+   It can't integrate jupyter notebooks, there's no HPC support 
+   and caching is ["handy but also tricky sometimes"](https://bookdown.org/yihui/rmarkdown/r-code.html): 
+   It supports caching individual code chunks, but it doesn't support proper
+   cache invalidation based on external file changes. I therefore kept re-executing
+   the entire pipeline most of the time. 
 
 
-To address these points, I propse the following thigs: 
+## I address these problems by combining notebooks with Nextflow
 
-* Re-execute all notebooks from command line and generate an HTML report. This ensures that there are no
-'hidden states' in the report. This can be achieved using Rmarkdown and and
-nbconvert. Below I will present a package I developed that facilitates this
-process and even supports fine-grained output-control for jupyter notebooks. 
+1. **Execute all notebooks from command-line and generate a HTML report.**
+   This immedeatly solves the problem of hidden states. See also this 
+   [excellent post by Yihui Xie](https://yihui.org/en/2018/09/notebook-war/).
+   We can do that through `Rscript -e "rmarkdown::render()"` or `jupyter
+   nbconvert --execute`, respectively. 
+
+2. **Use conda environments to pin software dependencies.** Nextflow supports
+   [conda environments](https://towardsdatascience.com/data-science-best-practices-python-environments-354b0dacd43a)
+   out-of-the-box. To ensure reproducibility of a notebook, I just
+   need to declare all dependencies in a [yaml file](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#create-env-file-manually)
+   and nextflow takes care of the rest. The same is true for [Docker](https://towardsdatascience.com/docker-made-easy-for-data-scientists-b32efbc23165)
+   or [Singularity](https://sylabs.io/docs/) containers, should you prefer those. 
+
+3. **Use a nbconvert
+   [TagRemovePreprocessor](https://nbconvert.readthedocs.io/en/latest/api/preprocessors.html#nbconvert.preprocessors.TagRemovePreprocessor)
+   to hide input and output cells**. Like this, we can add `{'tags': ["remove_input"]}` 
+   to the metadata of individual cells and hide the code in the HTML file.  
+
+4. **Chain notebooks using nextflow.**
+   Nextflow automatically only re-executes steps that have changed. 
+   It supports proper cache-validation based on external file changes (if all
+   input files are properly declared) 
+
+5. **Publish the results on github-pages**. 
+   No more E-mailing of reports. 
 
 * Chain together individual notebooks using nextflow. Integrate all HTML files
   into a single website that can be shared with collaborators. 
