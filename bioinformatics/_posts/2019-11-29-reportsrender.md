@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A Fully Reproducible Data Analysis Workflow Using Notebooks and Nextflow
+title: Building a Fully Reproducible Data Analysis Workflow Using Notebooks and Nextflow
 ---
 
 In this post, I will describe a data-analysis workflow I developed to
@@ -36,12 +36,22 @@ I achieve this by tying together two well-established technologies:
 and [Rmarkdown](https://rmarkdown.rstudio.com/) notebooks on the one hand and the
 pipelining engine [Nextflow](https://www.nextflow.io/) on the other hand.
 
+## This post in brief
+
 In the following section, I explain why using jupyter or
-Rmarkdown notebooks alone is not enough.
-Next, I will describe how I extend notebooks into a data science workflow.
-Finally, I introduce [reportsrender](https://github.com/grst/reportsrender/),
-a python package containing helper scripts
-to build the pipeline and provide a full example pipeline.
+Rmarkdown notebooks alone is not enough. I will reflect on a few weaknesses of
+notebooks and propse how to address them.
+
+Next, I'll introduce [reportsrender](https://github.com/grst/reportsrender/),
+a python package I created to facilitate generating HTML reports from both
+Jupyter and Rmarkdown notebooks.
+
+Finally, I'll show how to use reportsrender and Nextflow to build
+a fully reproducible data analysis pipeline.
+
+Reportsrender is [available from GitHub](https://github.com/grst/reportsrender/).
+The full example pipeline is available from [a separate repository](https://github.com/grst/universal_analysis_pipeline/)
+and I suggest to use it as a starting point for your next data analysis project.
 
 ## Notebooks alone are not enough
 
@@ -58,29 +68,41 @@ that we need to address:
 
 2. **Jupyter notebooks don't allow for fine-grained output control.**
    A [feature of Rmarkdown](https://yihui.org/knitr/options/#text-results)
-   which I'm missing in the Jupyter world is
-   to decide for each cell if I want to hide the input, the output or both.
+   that I'm missing in the Jupyter world is
+   to control for each cell if I want to hide the input, the output or both.
    This is extremely helpful for generating publication-ready reports. Like
-   that I don't have to scare the poor molecular biologist who reads
+   that, I don't have to scare the poor molecular biologist who is going to read
    my report with 20 lines of `matplotlib` code but can rather show the
    plot only.
 
 3. **Multi-step analyses require chaining of notebooks**. Clearly,
    in many cases it makes sense to split up the workflow in multiple notebooks,
-   potentially switching between R and python between them.  
+   potentially alternating programming languages.  
    [Bookdown](https://bookdown.org/) and [jupyter book](https://jupyterbook.org/intro.html)
    have been developed to this end and allow the integration of
    multiple Rmarkdown or jupyter notebooks respectively into a single
-   "book" document. I have
+   "book". I have
    [used bookdown previously](https://github.com/icbi-lab/immune_deconvolution_benchmark/)
-   and while it is great in principle, I wasn't completely satisfied:
+   and while it made a great report, it was not entirely satisfying:
    It can't integrate jupyter notebooks, there's no HPC support
    and caching is ["handy but also tricky sometimes"](https://bookdown.org/yihui/rmarkdown/r-code.html):
    It supports caching individual code chunks, but it doesn't support proper
-   cache invalidation based on external file changes. I therefore kept re-executing
+   cache invalidation based on external file changes. I, therefore, kept re-executing
    the entire pipeline most of the time.
 
-## Fixing notebooks and creating a data science workflow
+### Fix reproduciblity by re-executing notebooks from command-line in a conda environment
+
+In his [excellent post about notebooks], Yihui Xie advocates to
+re-execute every notebook from scratch in linear order, opposing the heavy
+critizism jupyter notebooks received for containing hidden states.
+
+### Hide outputs in Jupyter notebooks by using a _nbconvert_ preprocessor
+
+### Use Nextflow to orchestrate multi-step analyses and automate caching
+
+### Deploy reports on GitHub pages
+
+Github pages serves as a single point of truth. No more emailing of reports.
 
 With the following points I address the current limitations of notebooks
 and address the challenges mentioned initially:
@@ -162,9 +184,9 @@ reportsrender index --index=index.md first_report.html second_report.html third_
 
 Let's build a minimal example pipeline that first
 
-- generates some data in a jupyter notebook, then
-- visualizes the data in an Rmarkdown notebook and finally
-- deploys the reports to GitHub pages.
+1. generates some data in a jupyter notebook, then
+2. visualizes the data in an Rmarkdown notebook and finally
+3. deploys the reports to GitHub pages.
 
 ![pipeline workflow](/assets/bioinformatics/2019-11-29-reportsrender/pipeline_flowchart.png)
 
@@ -244,14 +266,14 @@ Show on GitHub: [`main.nf`](https://github.com/grst/universal_analysis_pipeline/
 The first process takes the jupyter notebook as an input and
 generates an HTML report and a `csv` file containing the dataset.
 The channel containing the dataset is passed on to the second
-process.
+process. Note that we use the `conda` directive, to define a
+conda environment in which the process will e executed.
 
 ```nextflow
 
 process generate_data {
     def id = "01_generate_data"
     conda "envs/run_notebook.yml"  //define a conda env for each step...
-    publishDir "$RES_DIR/$id"
 
     input:
         file notebook from Channel.fromPath("analyses/${id}.ipynb")
@@ -260,11 +282,9 @@ process generate_data {
         file "iris.csv" into generate_data_csv
         file "${id}.html" into generate_data_html
 
-
     """
     reportsrender ${notebook} \
         ${id}.html \
-        --cpus=${task.cpus} \
         --params="output_file=iris.csv"
     """
 }
@@ -278,7 +298,6 @@ and generates another HTML report.
 process visualize_data {
     def id = "02_visualize_data"
     conda "envs/run_notebook.yml"  //...or use a generic env for multiple steps.
-    publishDir "$RES_DIR/$id"
 
     input:
         file notebook from Channel.fromPath("analyses/${id}.Rmd")
@@ -291,19 +310,20 @@ process visualize_data {
     """
     reportsrender ${notebook} \
         ${id}.html \
-        --cpus=${task.cpus} \
         --params="input_file=iris.csv"
     """
 }
 ```
 
 The HTML reports are read by a third process and turned into a website
-ready to be served on GitHub pages.
+ready to be served on GitHub pages. The `publishDir` directive
+will copy the final reports into the `deploy` directory.
+It can then be pushed to GitHub pages.
 
 ```nextflow
 process deploy {
     conda "envs/run_notebook.yml"
-    publishDir "${params.deployDir}", mode: "copy"
+    publishDir "deploy", mode: "copy"
 
     input:
         file 'input/*' from Channel.from().mix(
