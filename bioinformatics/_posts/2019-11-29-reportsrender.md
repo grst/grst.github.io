@@ -94,7 +94,7 @@ that we need to address:
 ### Fix reproducibility by re-executing notebooks from command-line in a conda environment
 
 In [this excellent post](https://yihui.org/en/2018/09/notebook-war/),
-Yihui Xie, the inventor of Rmarkdown, advocates to re-execute every notebook from
+Yihui Xie, the inventor of Rmarkdown, advocates re-executing every notebook from
 scratch in linear order,
 responding to [Joel Grus' criticism](https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/preview#slide=id.g362da58057_0_1)
 on notebooks. Indeed, this immediately solves the issue with
@@ -110,9 +110,9 @@ extension for Jupyter notebooks.
 If we, additionally, define a [conda environment](https://towardsdatascience.com/data-science-best-practices-python-environments-354b0dacd43a) that pins
 all required software dependencies, we can be fairly sure that the result
 can later be reproduced by a different person on a different system. Alternatively,
-we could also use a [Docker](https://towardsdatascience.com/docker-made-easy-for-data-scientists-b32efbc23165)
-or [Singularity](https://sylabs.io/docs/) container. Luckily, Nextflow comes
-with support for either of these technologies out-of-the-box (see below).
+we could use a [Docker](https://towardsdatascience.com/docker-made-easy-for-data-scientists-b32efbc23165)
+or [Singularity](https://sylabs.io/docs/) container. Nextflow support
+either of these technologies out-of-the-box (see below).
 
 ### Hide outputs in Jupyter notebooks by using a _nbconvert_ preprocessor
 
@@ -121,7 +121,6 @@ to control the visibility of inputs/outputs in Jupyter notebooks.
 
 Luckily, `nbconvert` comes with a [TagRemovePreprocessor](https://nbconvert.readthedocs.io/en/latest/api/preprocessors.html#nbconvert.preprocessors.TagRemovePreprocessor)
 that allows to filter cells based on their metadata.
-to hide input and output cells in jupyter notebooks.
 
 By enabling the preprocessor, we can, for instance, add `{'tags': ["remove_input"]}`
 to the metadata of an individual cell and hide the input-code in the HTML report.
@@ -129,25 +128,25 @@ to the metadata of an individual cell and hide the input-code in the HTML report
 ### Use Nextflow to orchestrate multi-step analyses and automate caching
 
 [Nextflow](https://nextflow.io) is a relatively novel _domain specific language_
-to build data-driven computational pipelines. It is really easy to get started
+designed to build data-driven computational pipelines. It is really easy to get started
 with and yet very powerful. Wrapping our pipeline in nextflow automatically
-adresses the following:
+adresses the remaining issues:
 
-- **run everywhere**: nextflow abstracts the logic from the execution layer. Your
-  pipeline will therefore run locally, on an HPC or even a cloud provider with
+- **run everywhere**: Nextflow abstracts the pipeline logic from the execution layer.
+  Your pipeline will, therefore, run locally, on an HPC or in the cloud with
   no additonal effort.
 - **caching**: Nextflow automatically only re-executes steps that have changed.
-  It supports proper cache-validation based on external file changes (if all
-  input files are properly declared)
+  Based on the input files declared for each process, it properly supports cache
+  invalidaiton.
 - **environments**: Nextflow comes with native support for conda, Docker and
-  singularity. For instance, you can provided a conda [yaml file](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#create-env-file-manually)
+  Singularity. For instance, you can provided a conda [yaml file](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#create-env-file-manually)
   that lists all required dependencies and Nextflow will automatically
   download them before executing the analysis.
 
 ### Deploy reports on GitHub pages
 
 By executing the notebooks from the command line, we obtain an HTML report for each
-analysis step. While you could send them around via email, I advocate to automatically
+analysis step. While you could send them around via email, I recommend to automatically
 distribute them via GitHub pages. The website serves as a _single point of truth_
 and everyone needing to access your results will automatically receive the latest
 version.
