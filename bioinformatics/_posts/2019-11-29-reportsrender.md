@@ -18,7 +18,8 @@ address the challenges I face as a computational biologist:
 
 3. **Automatic execution on a high performance cluster (HPC).** Manually writing
    [job scripts](https://www.msi.umn.edu/content/job-submission-and-scheduling-pbs-scripts)
-   is a pain, the workflow should take care of that automatically.
+   and babysitting running jobs is a pain, the workflow should take care
+   of that automatically.
 
 4. **Automatically only re-execute modified parts.** Some steps can be
    computationally expensive, so it would be nice not having to execute them
@@ -63,7 +64,7 @@ that we need to address:
 1. **Using notebooks alone does not ensure reproducibility of your code.** The
    exact software libraries used must be documented. Moreover, jupyter
    notebooks have been
-   [critizised for containing hidden states](https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/preview#slide=id.g362da58057_0_1)
+   [critizised for](https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/preview#slide=id.g362da58057_0_1) potentially containing hidden states
    that hamper reproducibility.
 
 2. **Jupyter notebooks don't allow for fine-grained output control.**
@@ -90,57 +91,75 @@ that we need to address:
    cache invalidation based on external file changes. I, therefore, kept re-executing
    the entire pipeline most of the time.
 
-### Fix reproduciblity by re-executing notebooks from command-line in a conda environment
+### Fix reproducibility by re-executing notebooks from command-line in a conda environment
 
-In his [excellent post about notebooks], Yihui Xie advocates to
-re-execute every notebook from scratch in linear order, opposing the heavy
-critizism jupyter notebooks received for containing hidden states.
+In [this excellent post](https://yihui.org/en/2018/09/notebook-war/),
+Yihui Xie, the inventor of Rmarkdown, advocates to re-execute every notebook from
+scratch in linear order,
+responding to [Joel Grus' criticism](https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/preview#slide=id.g362da58057_0_1)
+on notebooks. Indeed, this immediately solves the issue with
+'hidden states'.
+
+We can execute notebooks from command-line through `Rscript -e "rmarkdown::render()"` or
+`jupyter nbconvert --execute`, respectively. Moreover, we can turn notebooks into
+parametrized scripts that allow us to specify input and output files from the command
+line. While this is [natively supported](https://bookdown.org/yihui/rmarkdown/parameterized-reports.html)
+by Rmarkdown, there's the [papermill](https://github.com/nteract/papermill)
+extension for Jupyter notebooks.
+
+If we, additionally, define a [conda environment](https://towardsdatascience.com/data-science-best-practices-python-environments-354b0dacd43a) that pins
+all required software dependencies, we can be fairly sure that the result
+can later be reproduced by a different person on a different system. Alternatively,
+we could also use a [Docker](https://towardsdatascience.com/docker-made-easy-for-data-scientists-b32efbc23165)
+or [Singularity](https://sylabs.io/docs/) container. Luckily, Nextflow comes
+with support for either of these technologies out-of-the-box (see below).
 
 ### Hide outputs in Jupyter notebooks by using a _nbconvert_ preprocessor
 
+While being natively supported by Rmarkdown, we need to find a workaround
+to control the visibility of inputs/outputs in Jupyter notebooks.
+
+Luckily, `nbconvert` comes with a [TagRemovePreprocessor](https://nbconvert.readthedocs.io/en/latest/api/preprocessors.html#nbconvert.preprocessors.TagRemovePreprocessor)
+that allows to filter cells based on their metadata.
+to hide input and output cells in jupyter notebooks.
+
+By enabling the preprocessor, we can, for instance, add `{'tags': ["remove_input"]}`
+to the metadata of an individual cell and hide the input-code in the HTML report.
+
 ### Use Nextflow to orchestrate multi-step analyses and automate caching
+
+[Nextflow](https://nextflow.io) is a relatively novel _domain specific language_
+to build data-driven computational pipelines. It is really easy to get started
+with and yet very powerful. Wrapping our pipeline in nextflow automatically
+adresses the following:
+
+- **run everywhere**: nextflow abstracts the logic from the execution layer. Your
+  pipeline will therefore run locally, on an HPC or even a cloud provider with
+  no additonal effort.
+- **caching**: Nextflow automatically only re-executes steps that have changed.
+  It supports proper cache-validation based on external file changes (if all
+  input files are properly declared)
+- **environments**: Nextflow comes with native support for conda, Docker and
+  singularity. For instance, you can provided a conda [yaml file](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#create-env-file-manually)
+  that lists all required dependencies and Nextflow will automatically
+  download them before executing the analysis.
 
 ### Deploy reports on GitHub pages
 
-Github pages serves as a single point of truth. No more emailing of reports.
-
-With the following points I address the current limitations of notebooks
-and address the challenges mentioned initially:
-
-1. **Execute all notebooks from command-line and generate a HTML report.**
-   This immediately solves the problem of hidden states. See also this
-   [excellent post by Yihui Xie](https://yihui.org/en/2018/09/notebook-war/).
-   We can do that through `Rscript -e "rmarkdown::render()"` or
-   `jupyter nbconvert --execute`, respectively. Input and output files can be defined
-   by parametrizing notebooks with [Rmarkdown](https://bookdown.org/yihui/rmarkdown/parameterized-reports.html)
-   or [papermill](https://github.com/nteract/papermill) respectively.
-
-2. **Use conda environments to pin software dependencies.** Nextflow supports
-   [conda environments](https://towardsdatascience.com/data-science-best-practices-python-environments-354b0dacd43a)
-   out-of-the-box. To ensure reproducibility of a notebook, I just
-   need to declare all dependencies in a [yaml file](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#create-env-file-manually)
-   and nextflow takes care of the rest. The same is true for [Docker](https://towardsdatascience.com/docker-made-easy-for-data-scientists-b32efbc23165)
-   or [Singularity](https://sylabs.io/docs/) containers, should you prefer those.
-
-3. **Use a nbconvert
-   [TagRemovePreprocessor](https://nbconvert.readthedocs.io/en/latest/api/preprocessors.html#nbconvert.preprocessors.TagRemovePreprocessor)
-   to hide input and output cells in jupyter notebooks**. Like this, we can add `{'tags': ["remove_input"]}`
-   to the metadata of individual cells and hide the code in the HTML file.
-
-4. **Chain notebooks using nextflow.**
-   Nextflow automatically only re-executes steps that have changed.
-   It supports proper cache-validation based on external file changes (if all
-   input files are properly declared)
-
-5. **Publish the results on github-pages**.
-   No more E-mailing of reports.
+By executing the notebooks from the command line, we obtain an HTML report for each
+analysis step. While you could send them around via email, I advocate to automatically
+distribute them via GitHub pages. The website serves as a _single point of truth_
+and everyone needing to access your results will automatically receive the latest
+version.
 
 ## I created the reportsrender package to facilitate building the pipeline
 
-To make these steps as easy as possible, I created the [reportsrender](https://github.com/grst/reportsrender)
-package in Python which wraps Nbconvert and Rmarkdown into a single command and
-automatically adds support for hiding inputs and outputs in jpyter.
-Both Rmarkdown and jupyter notebooks will be rendered with the same template
+To make these steps as easy as possible, I developed the [reportsrender](https://github.com/grst/reportsrender)
+package in Python which wraps Nbconvert and Rmarkdown into a single command.
+It adds support for [hiding inputs/outputs](https://reportsrender.readthedocs.io/en/latest/features.html#hiding-cell-inputs-outputs)
+and [notebook-parameters](https://reportsrender.readthedocs.io/en/latest/features.html#parametrized-notebooks)
+to Jupyter notebooks.
+Both Rmarkdown and Jupyter notebooks are rendered with the same template
 through [pandoc](https://github.com/jgm/pandoc), ensuring consistently looking reports.
 
 Executing and converting a notebook to HTML is as easy as:
@@ -188,12 +207,12 @@ Let's build a minimal example pipeline that first
 2. visualizes the data in an Rmarkdown notebook and finally
 3. deploys the reports to GitHub pages.
 
-![pipeline workflow](/assets/bioinformatics/2019-11-29-reportsrender/pipeline_flowchart.png)
-
 The full pipeline including additional recommenations on how to structure
 the project is [available from GitHub](https://github.com/grst/universal_analysis_pipeline).
 
 Here, I will describe step-by-step how to build it.
+
+![pipeline workflow](/assets/bioinformatics/2019-11-29-reportsrender/pipeline_flowchart.png)
 
 ### 1. Create a jupyter notebook that generates the data
 
@@ -202,16 +221,11 @@ Show on GitHub: [`01_generate_data.ipynb`](https://github.com/grst/universal_ana
 Let's first create a cell that defines the parameters
 for this notebook (in our case, the `output_file`).
 
-To this end, simply define a variable in a cell and add the
+To this end, define a variable in a cell and add the
 tag `parameters` to the cell metadata. This is documented on the
-[papermill website](https://papermill.readthedocs.io/en/latest/usage-parameterize.html)
-
+[papermill website](https://papermill.readthedocs.io/en/latest/usage-parameterize.html).
 The declared value serves as default parameter, and
 will be overwritten if the parameter is specified from the command line.
-We, first define a cell that specifies the path to the
-output file of the first notebook.
-This parameter can be manipulated from nextflow, if you add the tag `parameters` to the
-jupyter notebook cell metadata. This is documented on the [papermill website]().
 
 ```python
 In [1]: output_file = "results/dataset.tsv"
@@ -228,8 +242,10 @@ download the _iris_ example dataset and write it to a `csv` file.
 
 ```python
 In [2]: import pandas as pd
-	iris = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
-	iris.to_csv(output_file)
+        iris = pd.read_csv(
+            "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv"
+        )
+        iris.to_csv(output_file)
 ```
 
 ### 2. Create an Rmarkdown notebook for visualizing the data
@@ -297,7 +313,7 @@ and generates another HTML report.
 ```nextflow
 process visualize_data {
     def id = "02_visualize_data"
-    conda "envs/run_notebook.yml"  //...or use a generic env for multiple steps.
+    conda "envs/run_notebook.yml"  //...or use a single env for multiple steps.
 
     input:
         file notebook from Channel.fromPath("analyses/${id}.Rmd")
@@ -317,8 +333,8 @@ process visualize_data {
 
 The HTML reports are read by a third process and turned into a website
 ready to be served on GitHub pages. The `publishDir` directive
-will copy the final reports into the `deploy` directory.
-It can then be pushed to GitHub pages.
+will copy the final reports into the `deploy` directory, ready to be pushed to
+GitHub pages.
 
 ```nextflow
 process deploy {
