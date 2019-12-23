@@ -211,7 +211,7 @@ the project is [available from GitHub](https://github.com/grst/universal_analysi
 
 Here, I will describe step-by-step how to build it.
 
-<div style="text-align: center;">![pipeline workflow](/assets/bioinformatics/2019-11-29-reportsrender/pipeline_flowchart.png)</div>
+<div style="text-align: center;"><img src="/assets/bioinformatics/2019-11-29-reportsrender/pipeline_flowchart.png" alt="pipeline workflow" /></div>
 
 ### 1. Create a Jupyter notebook that generates the data
 
