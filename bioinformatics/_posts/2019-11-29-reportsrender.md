@@ -33,15 +33,15 @@ address the challenges I face as a computational biologist:
    to [outdated versions floating around](https://xkcd.com/1459/).
 
 I achieve this by tying together two well-established technologies:
-[Jupyter](https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/what_is_jupyter.html)
+[Jupyter](https://Jupyter-notebook-beginner-guide.readthedocs.io/en/latest/what_is_Jupyter.html)
 and [Rmarkdown](https://rmarkdown.rstudio.com/) notebooks on the one hand and the
 pipelining engine [Nextflow](https://www.nextflow.io/) on the other hand.
 
 ## This post in brief
 
-In the following section, I explain why using jupyter or
+In the following section, I explain why using Jupyter or
 Rmarkdown notebooks alone is not enough. I will reflect on a few weaknesses of
-notebooks and propse how to address them.
+notebooks and propose how to address them.
 
 Next, I'll introduce [reportsrender](https://github.com/grst/reportsrender/),
 a python package I created to facilitate generating HTML reports from both
@@ -56,13 +56,13 @@ and I suggest to use it as a starting point for your next data analysis project.
 
 ## Notebooks alone are not enough
 
-Notebooks are widely used among data scientists and they are a great tool to make
+Notebooks are widely used among data scientists, and they are a great tool to make
 analyses accessible. They are an obvious choice to form the basis
 of my workflow. However, notebooks alone have several shortcomings
 that we need to address:
 
 1. **Using notebooks alone does not ensure reproducibility of your code.** The
-   exact software libraries used must be documented. Moreover, jupyter
+   exact software libraries used must be documented. Moreover, Jupyter
    notebooks have been
    [critizised for](https://docs.google.com/presentation/d/1n2RlMdmv1p25Xy5thJUhkKGvjtV-dkAIsUXP-AL4ffI/preview#slide=id.g362da58057_0_1) potentially containing hidden states
    that hamper reproducibility.
@@ -72,20 +72,20 @@ that we need to address:
    that I'm missing in the Jupyter world is
    to control for each cell if I want to hide the input, the output or both.
    This is extremely helpful for generating publication-ready reports. Like
-   that, I don't have to scare the poor molecular biologist who is going to read
+   that, I don't have to scare the poor Molecular Biologist who is going to read
    my report with 20 lines of `matplotlib` code but can rather show the
    plot only.
 
 3. **Multi-step analyses require chaining of notebooks**. Clearly,
    in many cases it makes sense to split up the workflow in multiple notebooks,
    potentially alternating programming languages.  
-   [Bookdown](https://bookdown.org/) and [jupyter book](https://jupyterbook.org/intro.html)
+   [Bookdown](https://bookdown.org/) and [Jupyter book](https://Jupyterbook.org/intro.html)
    have been developed to this end and allow the integration of
-   multiple Rmarkdown or jupyter notebooks respectively into a single
+   multiple Rmarkdown or Jupyter notebooks respectively into a single
    "book". I have
    [used bookdown previously](https://github.com/icbi-lab/immune_deconvolution_benchmark/)
    and while it made a great report, it was not entirely satisfying:
-   It can't integrate jupyter notebooks, there's no HPC support
+   It can't integrate Jupyter notebooks, there's no HPC support
    and caching is ["handy but also tricky sometimes"](https://bookdown.org/yihui/rmarkdown/r-code.html):
    It supports caching individual code chunks, but it doesn't support proper
    cache invalidation based on external file changes. I, therefore, kept re-executing
@@ -101,7 +101,7 @@ on notebooks. Indeed, this immediately solves the issue with
 'hidden states'.
 
 We can execute notebooks from command-line through `Rscript -e "rmarkdown::render()"` or
-`jupyter nbconvert --execute`, respectively. Moreover, we can turn notebooks into
+`Jupyter nbconvert --execute`, respectively. Moreover, we can turn notebooks into
 parametrized scripts that allow us to specify input and output files from the command
 line. While this is [natively supported](https://bookdown.org/yihui/rmarkdown/parameterized-reports.html)
 by Rmarkdown, there's the [papermill](https://github.com/nteract/papermill)
@@ -111,7 +111,7 @@ If we, additionally, define a [conda environment](https://towardsdatascience.com
 all required software dependencies, we can be fairly sure that the result
 can later be reproduced by a different person on a different system. Alternatively,
 we could use a [Docker](https://towardsdatascience.com/docker-made-easy-for-data-scientists-b32efbc23165)
-or [Singularity](https://sylabs.io/docs/) container. Nextflow support
+or [Singularity](https://sylabs.io/docs/) container. Nextflow supports
 either of these technologies out-of-the-box (see below).
 
 ### Hide outputs in Jupyter notebooks by using a _nbconvert_ preprocessor
@@ -173,7 +173,7 @@ or
 reportsrender hello.Rmd hello_report.html
 ```
 
-Through [jupytext](https://github.com/mwouts/jupytext/) reportsrender
+Through [jupytext](https://github.com/mwouts/jupytext/), reportsrender
 supports executing arbitrary notebook formats. It can even execute
 python notebooks with Rmarkdown through the reticulate engine:
 
@@ -202,7 +202,7 @@ reportsrender index --index=index.md first_report.html second_report.html third_
 
 Let's build a minimal example pipeline that first
 
-1. generates some data in a jupyter notebook, then
+1. generates some data in a Jupyter notebook, then
 2. visualizes the data in an Rmarkdown notebook and finally
 3. deploys the reports to GitHub pages.
 
@@ -213,7 +213,7 @@ Here, I will describe step-by-step how to build it.
 
 ![pipeline workflow](/assets/bioinformatics/2019-11-29-reportsrender/pipeline_flowchart.png)
 
-### 1. Create a jupyter notebook that generates the data
+### 1. Create a Jupyter notebook that generates the data
 
 Show on GitHub: [`01_generate_data.ipynb`](https://github.com/grst/universal_analysis_pipeline/blob/master/analyses/01_generate_data.ipynb)
 
@@ -278,7 +278,7 @@ ggplot(iris_dataset, aes(x=sepal_width, y=sepal_length, color=species))
 
 Show on GitHub: [`main.nf`](https://github.com/grst/universal_analysis_pipeline/blob/master/main.nf)
 
-The first process takes the jupyter notebook as an input and
+The first process takes the Jupyter notebook as an input and
 generates an HTML report and a `csv` file containing the dataset.
 The channel containing the dataset is passed on to the second
 process. Note that we use the `conda` directive, to define a
