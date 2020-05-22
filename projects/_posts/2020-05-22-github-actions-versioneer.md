@@ -1,7 +1,7 @@
---
+---
 layout: post
 title: Using GitHub actions to bump version numbers of Python packages upon release
---
+---
 
 I used to be a big fan of projects like [Versioneer](https://github.com/warner/python-versioneer)
 or [get_version](https://github.com/flying-sheep/get_version) because they make
