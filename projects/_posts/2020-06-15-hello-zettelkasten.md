@@ -7,18 +7,19 @@ Over the last months, posts about
 [Zettelkästen](https://en.wikipedia.org/wiki/Zettelkasten) 
 tended to show up quite frequently on [Hacker
 News](https://news.ycombinator.com/) and caught my attention. 
-A *Zettelkasten* is an ingenious system of organizing notes, cleverly linking
+
+A *Zettelkasten* is an ingenious system for organizing notes, cleverly linking
 notes to each other. The system has most famously been applied by the
 German sociologist Niklas Luhmann (1927-1998), back then based on 
 physical boxes ("Kasten") with slips of paper ("Zettel") in them. 
 
-![zettelkasten](2020-06-15_zettelkasten/zettelkasten.png)
+![zettelkasten](/assets/projects/2020-06-15_zettelkasten/zettelkasten.png)
 *Image by [David B. Clear](https://medium.com/@davidbclear) under CC BY-SA 4.0*
 
 
 ## My personal story of notetaking 
 
-Years before *Zettelkästen* got hyped, I used to keep notes in Microsoft
+Years before *Zettelkästen* got hyped in the community, I used to keep notes in Microsoft
 OneNote. Essentially I stored every note taken during my last three years 
 of secondary school and my Bachelor's studies in one huge notebook. If exported
 to PDF, it comprised several thousand pages. I was quite content with the
@@ -32,7 +33,7 @@ for at least two years). Being locked into the proprietary system, my notes ende
 being dumped into a HTML file, and almost never looked upon again. Since then, 
 I stored notes as a mixture of [Google Keep](https://keep.google.com), 
 [Dropbox Paper](https://paper.dropbox.com), [Google Docs](https://docs.google.com) 
-and a bunch of unorganized markdown files. By no means organized, cross-linked
+and a bunch of scattered markdown files. By no means organized, cross-linked
 or universally searchable. 
 
 As of today, I started migrating my notes to [Zettlr](https://zettlr.com/), implementing
@@ -62,4 +63,4 @@ Furthermore, notes can be organized using *connection notes* ("Strukturzettel")
 and *outline notes* ("Folgezettel"). A connection note is a note that links
 multiple Zettel and explains why they are related. An outline note connects notes
 in a particular order to form a storyline. They can be considered as a precursor
-of writing, for instance a blog post or a scientific paper. 
+of writing, for instance, a blog post or a scientific paper. 
