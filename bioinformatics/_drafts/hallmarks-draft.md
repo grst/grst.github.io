@@ -38,7 +38,7 @@ The first four hallmarks apply to both software packages and data analysis repor
 In addition to that, two more hallmarks apply to data analysis reports: 
 
 5. Use automated reporting (e.g. [Rmarkdown](https://rmarkdown.rstudio.com/), [Jupyter notebooks](https://jupyter.org/))
-6. Use a pipelining engine (e.g. [nextflow](https://www.nextflow.io/), [Snakemake](https://snakemake.readthedocs.io/en/stable/))
+6. Use a workflow manager (e.g. [nextflow](https://www.nextflow.io/), [Snakemake](https://snakemake.readthedocs.io/en/stable/))
 
 
 ## Use version control
@@ -123,38 +123,76 @@ For data analysis reports, it is best to mix the documentation with the code (se
 ## Write self-reporting data-analyses
 ![notebooks](/assets/bioinformatics/brick_reporting.png)
 
-It is common practice to run a few commands in an R shell to produce a plot and then copy and 
-paste it to a PowerPoint presentation. **This is not only terrible from a reproducibility 
-perspective,  it is also inefficient and error-prone.** It is inefficient, because you have to re-do the plot manually  if you change your preprocessing or get new data. It is error-prone, because you'll forget to  update all plots and old (wrong) versions keep floating around. 
+It is common practice to run a few commands in an R shell to produce a plot and
+then copy and paste it to a PowerPoint presentation. **This is not only terrible
+from a reproducibility perspective,  it is also inefficient and error-prone.**
+It is inefficient, because you have to re-do the plot manually  if you change
+your preprocessing or get new data. It is error-prone, because you'll forget to
+update all plots and old (wrong) versions keep floating around. 
 
-By using self-reporting data analyses this process gets streamlined and automated.  An excellent way to write self-reporting data analyses are *Notebooks*[^notebooks]. Notebooks are an 
-implementation of [literate programming](https://en.wikipedia.org/wiki/Literate_programming), a way of mixing computer code with prose language. 
-Like that, you can explain your data and your results at the same place where you do the 
-analysis. Notebooks can be rendered into beautiful web-pages, presentations, or PDF 
-documents which you can directly send to your collaborators. Finally, you can publish them alongside your paper ensuring other researchers can understand your 
-analysis. 
+By using self-reporting data analyses this process gets streamlined and
+automated.  An excellent way to write self-reporting data analyses are
+*Notebooks*[^notebooks]. Notebooks are an implementation of [literate
+programming](https://en.wikipedia.org/wiki/Literate_programming), a way of
+mixing computer code with prose language. Like that, you can explain your data
+and your results at the same place where you perform the analysis. Notebooks can be
+rendered into beautiful web-pages, presentations, or PDF documents which you can
+directly share with your collaborators. Finally, you can publish them alongside
+your paper ensuring other researchers can understand your analysis. 
 
 **Tools of choice:** [Rmarkdown](https://rmarkdown.rstudio.com/) and [bookdown](https://bookdown.org/home/) when using R, [Jupyter notebooks](https://jupyter.org/), and [jupyter book](https://jupyterbook.org/intro.html) for Python and other languages. 
 
 [^notebooks]: Notebooks are a *terrible* tool to develop software packages. Only use them to 
-describe your analysis and factor out longer code snippets into external modules. For more 
-background, read [this post by Yihui Xie](https://yihui.org/en/2018/09/notebook-war/). 
+	describe your analysis and factor out longer code snippets into external modules. For more 
+	background, read [this post by Yihui Xie](https://yihui.org/en/2018/09/notebook-war/). 
 
-## Use a pipelining engine
+## Use a workflow manager 
 ![pipelines](/assets/bioinformatics/brick_pipeline.png)
 
-While notebooks are great for documenting and streamlining downstream analyses, they are 
-unsuitable for computationally expensive tasks like preprocessing raw sequencing files. Similar to the downstream analyses, the naive approach is to write a few bash scripts and run them on a workstation or submit them to a high performance cluster (HPC). Again, this is irreproducible, inefficient and error-prone. It is irreproducible, because it is hard to appreciate in which order the scripts need to be ran. Moreover, the jobscripts are likely to be specific for the scheduler installed at your institution. It is inefficient, bacause you manually need to submit the next step after the previous one and check if all jobs completed successfully. It is error-prone, because it is easy to forget to re-execute certain steps after changing parameters or fixing bugs.  
+While notebooks are great for documenting and streamlining downstream analyses,
+they are unsuitable for computationally expensive tasks like preprocessing raw
+sequencing files. Similar to the downstream analyses, **the naive approach is to
+write a few bash scripts and run them on a workstation or submit them to a high
+performance cluster (HPC). Again, this is irreproducible, inefficient and
+error-prone.** It is irreproducible, because it is hard to appreciate in which
+order the scripts need to be ran. Moreover, the scripts are likely to be
+specific for the scheduler used on your HPC. It is inefficient, because you
+manually need to ensure that all jobs completed successfully before running the
+next step. It is error-prone, because it is easy to forget to re-execute certain
+steps after changing parameters or fixing bugs.  
 
-By using a *pipelining engine*, you solve all these problems. By writing a pipeline-script, you implicitly document which of your analyses depends on what and in which order they need to be executed. The pipelining engine takes care of executing the individual steps **in parallel** wherever possible and makes sure to only re-compute parts that were modified. The piplining engine abstracts the pipeline logic from the task scheduler, making it portable across systems and institutions. 
+By using a *workflow manager*, you solve all these problems. In a
+pipeline-script, you implicitly document which of your analysis-steps depends on
+which input-files and intermediate results and thereby, in which order they need
+to be executed.  The workflow manager takes care of executing the individual
+steps **in parallel** wherever possible and makes sure to only re-compute parts
+that were modified. Moreover, it abstracts the pipeline logic from the
+system used for executiong, enabling your pipeline to **run everywhere**, be 
+it on a personal computer, institutional HPC or cloud instances. 
 
-Moreover, pipeline engines play well with the other concepts in this article. They support directly executing pipelines from GitHub, can automatically run tasks in containers and can be used to render and chain together multiple notebooks as I have shown in [a previous post](https://grst.github.io/bioinformatics/2019/12/23/reportsrender.html). In brief, by providing a pipeline, other researchers can reliably reproduce your entire analysis with a single-command. 
+Workflow managers play well with the other concepts discussed in this
+article. They can directly execute pipelines from GitHub, 
+execute tasks in containers and can be used to [tie together multiple
+notebooks](https://grst.github.io/bioinformatics/2019/12/23/reportsrender.html). In
+brief, by providing a pipeline, other researchers can reliably reproduce your
+entire analysis with a single-command. 
 
-For software packages, it often makes sense to rely on a pipelining engine for chaining multiple steps together, rather than implementing this in a custom script: Many problems, like submitting jobs to HPC or cloud instances, caching, etc. has already been excellently solved by these engines and there is no need to re-invent the wheel. By implementing a pipeline, you get portable HPC support and caching "for free". 
+Finally, when developing re-usable software packages, it can often make sense to build
+upon a workflow manager. Many problems, like parallelization, submitting jobs to
+HPC or cloud instances, caching, etc. has already been excellently solved by these
+tools and there is no need to re-invent the wheel.
 
-**Tools of choice:** [nextflow](https://www.nextflow.io/) or [Snakemake](https://snakemake.readthedocs.io/en/stable/) [^pipelinetools]
+**Tools of choice:** [nextflow](https://www.nextflow.io/) or [Snakemake](https://snakemake.readthedocs.io/en/stable/)[^pipelinetools]
 
 [^pipelinetools]: Both nextflow and Snakemake are excellent. I personally prefer nextflow because I find it easier to get started with. See also my [comparison on GitHub](https://github.com/grst/snakemake[^x]:_nextflow_wdl). 
 
 ## Further reading
-In this article, I gave a high-level overview of the hallmarks. For a hands-on tutorial I recommend [this course](https://nbis-reproducible-research.readthedocs.io/en/latest/repres_project/) by the [NBIS](https://www.nbis.se/). Quite recently a [review preprint]( https://www.biorxiv.org/content/10.1101/2020.06.30.178673v1.abstract?%3Fcollection=) about how and why you should use pipelining engines has been published on biorXiv.
+In this article, I gave a high-level overview of the hallmarks. For a hands-on
+tutorial I recommend [this
+training material](https://nbis-reproducible-research.readthedocs.io/en/latest/repres_project/)
+by the [NBIS](https://www.nbis.se/). Quite recently a [review preprint](
+https://www.biorxiv.org/content/10.1101/2020.06.30.178673v1.abstract?%3Fcollection=)
+about how and why you should use pipelining engines has been published on
+biorXiv.
+
+## Footnotes
