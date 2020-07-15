@@ -1,7 +1,7 @@
 ---
 id: 20200628092923
 layout: post
-title: Hallmarks of Great Scientific Software
+title: Hallmarks of Good Scientific Software
 ---
 
 Science is facing a [reproducibility
@@ -13,6 +13,8 @@ researchers through improving their code quality, maximizing the utility and
 impact of the software, and in the long run improve the perspective of
 replication in science.
 
+Adhering to these guidelines is one aspect of making your research [FAIR](https://www.go-fair.org/fair-principles/) (**f**indable, **a**ccessible, **i**nteroperable and **r**eusable).
+
 ![hallmarks](/assets/bioinformatics/hallmarks_annotated.png)
 
 **Figure 1**: The Hallmarks of Good Scientific Software[^hallmarks]. The icons
@@ -20,8 +22,7 @@ replication in science.
  may be reused under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
  license.
 
-[^hallmarks]: Of course, the title and the figure are inspired by [the hallmarks
-  of cancer](https://doi.org/10.1016/j.cell.2011.02.013).
+[^hallmarks]: Of course, the title and the figure are inspired by [the hallmarks of cancer](https://doi.org/10.1016/j.cell.2011.02.013).
 
 Let's first distinguish between *software packages* and *data analysis reports*.
 Both are pieces of software which are covered by the hallmarks – however, they
@@ -34,7 +35,7 @@ analysis like [scanpy](https://scanpy.readthedocs.io/) or
 **reusability**, defined by the ability to reuse the code for multiple datasets
 and for diverse goals of data analysis.
 
-In contrast, *Data analysis reports* mostly build upon existing software
+In contrast, *data analysis reports* mostly build upon existing software
 packages and are specifically adapted to produce interpretable results for a
 certain dataset. The main goal of data analysis reports is **reproducibility**,
 defined by the ability to reproduce the results when run in another computing
@@ -73,15 +74,23 @@ There are many benefits of using git and GitHub, for instance:
 * It allows you to keep track of what you did (this is very useful when continuing on a project after several weeks of interruption).
 * It allows you to synchronize changes across working environments (say laptop and server cluster) and between collaborators.
 * GitHub provides an issue tracker and project management tools to keep track of bugs and suggestions.
-* GitHub increases your visibility in the community and promotes community contributions in form of [pull requests](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests). 
+
+Yet, the most important aspect of using GitHub is to get people involved with your software.  
+**Science is communication, and GitHub is the way to communicate about scientific 
+software.** It increases your visibility in the community and makes your software 
+being discovered more easily. You can retrieve feedback in form of bug reports, feature
+requests and code reviews. Others can directly contribute improvements in the form of
+[pull requests](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests). 
+Finally, it enables you to browse other, well-engineered pieces of software and learn
+from them by reading their code.  
 
 **Tool of choice:** [git](http://git-scm.com) in combination with [GitHub](https://github.com) or [GitLab](https://gitlab.com). 
 
 [^github]: [GitLab](https://about.gitlab.com/) is an alternative to GitHub which
-  is becoming more and more popular. In contrast to GitHub it is open source and
-  can be installed on your own servers. Nevertheless, GitHub is where all the
-  developers are and that's where you want your project to be for being
-  discovered.
+    is becoming more and more popular. In contrast to GitHub it is open source and
+    can be installed on your own servers. Nevertheless, GitHub is where all the
+    developers are and that's where you want your project to be for being
+    discovered.
 
 ## Use automated testing and continuous integration
 ![testing](/assets/bioinformatics/brick_testing.png)
@@ -101,16 +110,20 @@ you also write a *unit test* that calls the piece of code with some example
 data, and validates that it produces the expected result.  
 
 Initially, this might seem like a waste of time, but it isn't: it helps to to
-**find bugs early**. As a result, it pays and saves time in the long run.
-Finding bugs early decreases the cost for fixing them. If you detect a bug right
-after writing the function, you still have everything in your memory and can
-likely fix it within minutes. If the bug is discovered by someone else a few
-months later, it might take you hours or days to figure out the problem, because
-you have to dig into the code again. There are excellent packages for automated
-testing for virtually every programming language. The most common ones are
-[pytest](https://docs.pytest.org/en/latest/) for Python (here I recommend
-hypothesis as well, which can greatly expand the input space) and
-[testthat](https://testthat.r-lib.org/) for R.
+**find bugs early**. As a result, it pays off and saves time in the long run.
+Finding bugs early decreases the cost for fixing them. If you detect a bug
+right after writing the function, you still have everything in your memory
+and can likely fix it within minutes. If the bug is discovered by someone
+else a few months later, it might take you hours or days to figure out the
+problem, because you have to dig into the code again. There are excellent
+packages for automated testing for virtually every programming language. The
+most common ones are [pytest](https://docs.pytest.org/en/latest/) for Python
+and [testthat](https://testthat.r-lib.org/) for R. Moreover,
+[Hypothesis](https://hypothesis.readthedocs.io/en/latest/) is a python
+package implementing [property-based
+testing](https://medium.com/criteo-labs/introduction-to-property-based-testing-f5236229d237),
+which holds the promise to facilitate writing tests while covering a larger
+set of test cases.
 
 Writing tests by itself is not helpful if they are not executed on a regular
 basis. This is where *continuous integration* comes into place. Continuous
@@ -121,15 +134,17 @@ workflow](https://guides.github.com/introduction/flow/), you ensure that the
 code on your master branch is always fully tested. You are notified when tests
 fail, therefore increasing the chance to fix bugs early and quickly.
 
-**Tools of choice**: [pytest](foo) for Python packages, [testthat](foo) for R
-packages. [GitHub Actions](foo) for continuous integration. 
+**Tools of choice**: [pytest](https://docs.pytest.org/en/latest/) and
+[Hypothesis](https://hypothesis.readthedocs.io/en/latest/) 
+for Python packages, [testthat](https://testthat.r-lib.org/) for R
+packages. [GitHub Actions](https://docs.github.com/en/actions) for continuous integration. 
 
 ## Containerize dependencies
 ![container](/assets/bioinformatics/brick_container.png)
 
 > If I have seen further it is by standing on the shoulders of Giants.
 
-*(Isaac Newton, 1675)*
+<p align="right"><i>(Isaac Newton, 1675)</i></p>
 
 This is definitely true for scientific software. Most software packages and data
 analyses would not be possible without giants like
@@ -147,11 +162,7 @@ software to run, **down to the exact version number**.  The most reliable way of
 doing so is to build a *container* with all software required to run your
 software. That way, your package or analysis can be ran in exactly the same
 software environment you have been using. Containers are one of the few ways to ensure
-that your analysis can be ran in a few years from now[^conda-reprod] (just a
-joke: another way is to buy a new server every time when you publish a software
-paper, keep that running, and book the bills from your funding agency - if not
-joking, there are other ways, for instance dedicated server, but I agree
-containerization is a good point).
+that your analysis can be ran in a few years from now[^conda-reprod].
 
 For software packages (as opposed to data analysis reports) it is also
 appropriate to declare the dependencies in the format of the corresponding
@@ -168,10 +179,12 @@ container.
 [Bioconda](https://bioconda.github.io/) or
 [conda-forge](https://conda-forge.org/) for software packages.
 
-[^conda-reprod]: I long believed that by [exporting a conda
-  environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#sharing-an-environment)
-  the same can be achieved, but was proven wrong. See the [discussion on
-  GitHub](https://github.com/conda/conda/issues/9257). 
+[^conda-reprod]: Another way is to buy a new server every time you publish a
+    paper, keep that running and bill your funding agency for it. I long believed
+    that by [exporting a conda
+    environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#sharing-an-environment)
+    the same can be achieved, but was proven wrong. See the [discussion on
+    GitHub](https://github.com/conda/conda/issues/9257).
 
 ## Write extensive, high-quality documentation
 ![docs](/assets/bioinformatics/brick_docs.png)
@@ -191,14 +204,8 @@ step-by-step tutorial teaching the user to apply the software to real-world
 datasets.
 
 For data analysis reports, it is best to mix the documentation with the code
-(see [self-reporting analyses](#write-self-reporting-data-analyses). Moreover,
+(see [self-reporting analyses](#write-self-reporting-data-analyses)). Moreover,
 it is vital to provide step-by-step instructions on how to rerun the analysis.
-
-
-(David: here I have a question: what's the best practice to keep codes and
-documentation synchronized? Often I spend much time on this, too, and have not
-found good solutions. What happens is that when I change the code, I forgot to
-change the documentation, until an user complains.)
 
 **Tools of choice**: [sphinx](https://www.sphinx-doc.org/en/master/)
 (Python/general purpose) and [pkgdown](https://pkgdown.r-lib.org/) for R. 
@@ -215,7 +222,7 @@ update all plots and old (wrong) versions keep floating around.
 
 By using self-reporting data analyses this process gets streamlined and
 automated.  An excellent way to write self-reporting data analyses are
-*Notebooks*[^notebooks]. Notebooks are an implementation of [literate
+*Notebooks*. Notebooks are an implementation of [literate
 programming](https://en.wikipedia.org/wiki/Literate_programming), a way of
 mixing computer code with prose language. In this way, you can explain your data
 and your results at the same place where you perform the analysis. Notebooks can
@@ -223,15 +230,18 @@ be rendered into beautiful web-pages, presentations, or PDF documents which you
 can directly share with your collaborators. Finally, you can publish them
 alongside your paper ensuring other researchers can understand your analysis.
 
+However, notebooks are a *terrible* tool to develop software packages. Only use them
+to describe your analysis using high-level functions and factor out all longer, 
+repetitive code-snippets into an external software package. The package can 
+be properly tested using automated testing as described above, and re-used for other 
+projects, saving you time in the long run. For more background, read [this post by Yihui
+Xie](https://yihui.org/en/2018/09/notebook-war/). 
+
 **Tools of choice:** [Rmarkdown](https://rmarkdown.rstudio.com/) and
 [bookdown](https://bookdown.org/home/) when using R, [Jupyter
 notebooks](https://jupyter.org/), and [jupyter
 book](https://jupyterbook.org/intro.html) for Python and other languages.
 
-[^notebooks]: Notebooks are a *terrible* tool to develop software packages. Only
-  use them to describe your analysis and factor out longer code snippets into
-  external modules. For more background, read [this post by Yihui
-  Xie](https://yihui.org/en/2018/09/notebook-war/). 
 
 ## Use a workflow manager
 ![pipelines](/assets/bioinformatics/brick_pipeline.png)
@@ -273,8 +283,8 @@ solved by these tools and there is no need to re-invent the wheel.
 [Snakemake](https://snakemake.readthedocs.io/en/stable/)[^pipelinetools]
 
 [^pipelinetools]: Both nextflow and Snakemake are excellent. I personally prefer
-  nextflow because I find it easier to get started with. See also my [comparison
-  on GitHub](https://github.com/grst/snakemake[^x]:_nextflow_wdl).
+    nextflow because I find it easier to get started with. See also my [comparison
+    on GitHub](https://github.com/grst/snakemake[^x]:_nextflow_wdl).
 
 ## Further reading
 
@@ -286,36 +296,9 @@ https://www.biorxiv.org/content/10.1101/2020.06.30.178673v1.abstract?%3Fcollecti
 about how and why you should use pipelining engines has been published on
 biorXiv.
 
+## Acknowledgements
+
+I would like to thank [Jitao David Zhang](https://jdzhang.me) for his feedback
+on this article. 
+
 ## Footnotes
-
-## Further comments by David
-
-Thanks Gregor for sharing. I enjoyed the reading. A few points that I think
-important, though I am pretty sure that you know them already.
-
-* What you talk about are rather *tools*. What I believe matter a lot are
-    *mindsets*. For instance, the simple rules including *don't repeat your
-    self*, and *keep it simple, stupid* are important as well. They are the
-    fundamentals of developing reusable and reproducible code. There the book *clean
-    code* (though written for Java) is a good one. Or the refactor book is a
-    good starting point.
-* For people working with applied bioinformatics and computational sciences, I
-    believe an important skill set (as you described) is to write functions in
-    reports, factor them out, and **package them**. This should become a habit
-    as early as possible in the career.
-* Another point I am missing is to *involve people*. You discussed this in
-    multiple contexts implicitly. I want to discuss it also explicitly: sharing
-    a piece of code with the public is to communicate with them. Concretely,
-    involve as many people as possible to test your code (github is one way,
-    another way is for instance by teaching, yet another way is to setup Web
-    UIs and ask for feedback). Invite them to give feedback, not only about
-    logic but also about code. Given enough eyeballs, all bugs are shallow,
-    E. Raymond got it right.
-* In the same line, read other people's code and learn from them. That is a
-    fast lane to program well.
-* Maybe you can consider your points also in the FAIR context. What you describe
-    make software findable (github), accessible (github), interoperable
-    (containerization and workflow), and reproducible.
-* Developing software is a long-term investment. A piece of high-quality
-    software is a wealth. Create them with enthusiasm and craftsmanship, because
-    users and other coders can feel that.
