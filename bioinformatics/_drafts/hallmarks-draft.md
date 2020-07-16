@@ -24,7 +24,15 @@ Adhering to these guidelines is one aspect of making your research [FAIR](https:
 
 [^hallmarks]: Of course, the title and the figure are inspired by [the hallmarks of cancer](https://doi.org/10.1016/j.cell.2011.02.013).
 
-Let's first distinguish between *software packages* and *data analysis reports*.
+These hallmarks focus on tools and habits which will help taking your software quality
+to the next level. I assume that you are already familiar with the basics of 
+*clean coding principles*, i.e. you format your code consistently, use sensible 
+variable names, and [keep everything stupidly simple](https://en.wikipedia.org/wiki/KISS_principle). 
+The importance of writing easy-to-read code cannot be overstated. 
+A good starting point for learning how to write clean code is this [style guide for R](http://stat405.had.co.nz/r-style.html)
+and the [clean-code-python](https://github.com/zedr/clean-code-python#introduction) project. 
+
+Next, let's distinguish between *software packages* and *data analysis reports*.
 Both are pieces of software which are covered by the hallmarks – however, they
 have slightly different priorities.  Software packages are a tool, or a
 collection of tools which are created with the aim of being applied to different
@@ -75,8 +83,8 @@ There are many benefits of using git and GitHub, for instance:
 * It allows you to synchronize changes across working environments (say laptop and server cluster) and between collaborators.
 * GitHub provides an issue tracker and project management tools to keep track of bugs and suggestions.
 
-Yet, the most important aspect of using GitHub is to get people involved with your software.  
-**Science is communication, and GitHub is the way to communicate about scientific 
+Yet, the most important aspect of using GitHub is to get people involved with your software.   
+**Communication is an essential part of the scientific process, and GitHub is the way to communicate about scientific 
 software.** It increases your visibility in the community and makes your software 
 being discovered more easily. You can retrieve feedback in form of bug reports, feature
 requests and code reviews. Others can directly contribute improvements in the form of
