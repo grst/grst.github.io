@@ -135,7 +135,7 @@ the string interpolation defers the execution until the input channels are avail
 but not until the code in the `exec` section got executed.  
 
 
-## 2. The Nextflow `Script` class and the implicit variable  `this` 
+## 3. The Nextflow "Script" class and the implicit variable "this"
 
 Internally, for Nextflow, each `.nf` file is an instance of the class [`Script`](https://docs.groovy-lang.org/latest/html/api/groovy/lang/Script.html).
 From within the file it can be accessed as the implicit variable `this`. 
@@ -164,22 +164,25 @@ workflow {
     foo()                                                                       
 }    
 ```
+
 **Output**:
 ```
 [
     args:[], params:[bar:test], baseDir:/scratch/nf-test,
     projectDir:/scratch/nf-test, workDir:/scratch/nf-test/work, 
     workflow:repository: null, projectDir: /scratch/nf-test,
-    commitId: null, revision: null, startTime: 2020-11-28T16:47:44.162643+01:00,
-    endTime: null, duration: null, container: {}, commandLine: nextflow ./test.nf,
+    commitId: null, revision: null,
+    startTime: 2020-11-28T16:47:44.162643+01:00, endTime: null,
+    duration: null, container: {}, commandLine: nextflow ./test.nf,
     nextflow: nextflow.NextflowMeta([...]), success: false,
-    workDir: /scratch/nf-test/work, launchDir: /scratch/nf-test, profile: standard, 
-    nextflow:nextflow.NextflowMeta([...]), launchDir:/scratch/nf-test,
-    moduleDir:/scratch/nf-test, script_var:42]
+    workDir: /scratch/nf-test/work, launchDir: /scratch/nf-test,
+    profile: standard, nextflow:nextflow.NextflowMeta([...]),
+    launchDir:/scratch/nf-test, moduleDir:/scratch/nf-test,
+    script_var:42
 ]
 ```
 
-## 3. Nextflow's process representation and the `task` implicit variable
+## 4. Nextflow's process representation and the "task" implicit variable
 
 I already used the expression `task.cpus` many times in my nextflow pipelines, without
 questioning how it works. 
@@ -217,8 +220,9 @@ workflow {
 ```
 task = [
     process_var:42, process:foo, cpus:2, index:1, echo:false,
-    validExitStatus:[0], maxRetries:0, maxErrors:-1, shell:[/bin/bash, -ue],
-    executor:local, name:foo, cacheable:true, errorStrategy:TERMINATE,
+    validExitStatus:[0], maxRetries:0, maxErrors:-1, 
+    shell:[/bin/bash, -ue], executor:local, name:foo, 
+    cacheable:true, errorStrategy:TERMINATE,
     workDir:/scratch/nf-test/work/7a/605dabf4d1b454c288434b6381622c, 
     hash:7a605dabf4d1b454c288434b6381622c
 ]
@@ -228,7 +232,7 @@ task.binding = [meta:[id:test], $:true, task:[...], id:test]
 
 
 
-## 2. Debugging Nextflow
+## 5. Debugging Nextflow
 
 I found that Nextflow's fancy ANSI-logging feature sometimes swallows `println` statements
 or error messages. It is possible to turn it off using `nextflow run -ansi-log false`. 
