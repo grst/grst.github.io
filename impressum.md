@@ -5,11 +5,17 @@ header: Impressum
 ---
 
 ## Verantwortlichkeit
-Gregor Sturm Computerdienstleistungen<br />
+Gregor Sturm<br />
 Alte Dorfstr. 9<br />
 87509 Immenstadt<br />
-Steuernummer: 123/279/20055<br />
 E-Mail: mail(at)gregor-sturm.de<br />
+
+## Datenschutz
+Diese Seite verwendet [GoatCounter](https://www.goatcounter.com/) um
+Nutzungstatistiken zu erstellen. GoatCounter verwendet keine Cookies
+und ist [DSGVO-konform](https://www.goatcounter.com/gdpr). Eine Liste 
+der erhobenen Daten steht [hier](https://www.goatcounter.com/privacy) 
+zur Verfügung. 
 
 ## Haftungsausschluss
 
