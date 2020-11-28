@@ -7,6 +7,9 @@ I recently created a proof-of-principle for a [deeper integration of jupyter not
 and started implementing my first [modules](https://github.com/nf-core/modules) in the
 new [Nextflow DSL2](https://www.nextflow.io/blog/2020/dsl2-is-here.html).  While doing so, I learned a lot about Groovy, and Nextflow itself.
 
+![dungbeetle](/assets/bioinformatics/dung_beetle.jpg)
+*A small bug: A dung beetle, captured in Piano Battaglia, Sicily, Italy*
+
 
 ## 1. Closures
 
@@ -237,4 +240,4 @@ task.binding = [meta:[id:test], $:true, task:[...], id:test]
 I found that Nextflow's fancy ANSI-logging feature sometimes swallows `println` statements
 or error messages. It is possible to turn it off using `nextflow run -ansi-log false`. 
 I also learned to check the `.nextflow.log` file more often. It sometimes contains
-helpful additional information such as full Java stack traces. 
+helpful additional information, such as full Java stack traces. 
