@@ -5,9 +5,7 @@ layout: post
 
 I recently created a proof-of-principle for a [deeper integration of jupyter notebooks with nextflow](https://github.com/grst/nxfvars/) 
 and started implementing my first [modules](https://github.com/nf-core/modules) in the
-new [Nextflow DSL2](https://www.nextflow.io/blog/2020/dsl2-is-here.html). 
-
-While doing so, I learned a lot about Groovy, and Nextflow itself:
+new [Nextflow DSL2](https://www.nextflow.io/blog/2020/dsl2-is-here.html).  While doing so, I learned a lot about Groovy, and Nextflow itself.
 
 
 ## 1. Closures
@@ -15,7 +13,7 @@ While doing so, I learned a lot about Groovy, and Nextflow itself:
 Closures are omnipresent in nextflow pipelins, and I have used them many times
 without knowing. For instance in
 
-```nextflow
+```groovy
 awesome_channel.map { it -> it + 1}
 ```
 the expression `{it -> it + 1 }` is a closure. 
@@ -78,7 +76,7 @@ gets evaluated, before variables from the input channels become available.
 Therefore, the following snippet does not work: 
 
 **Input**:
-```nextflow                                                                              
+```groovy                                                                              
 nextflow.enable.dsl = 2                                                         
                                                                                 
 process foo {                                                                   
@@ -109,7 +107,7 @@ process actually gets executed and the values become available:
 
 
 **Input**:
-```nextflow                                                                              
+```groovy                                                                              
 nextflow.enable.dsl = 2                                                         
                                                                                 
 process foo {                                                                   
@@ -152,7 +150,7 @@ amongst others:
 Note that variables declared using `def` are not accessible through `this` (→ `other_var` in the example) . 
 
 **Input:**
-```nextflow
+```groovy
 params.bar = "test"                                                             
 script_var = 42                                                                 
 def other_var = 1                                                     
@@ -194,7 +192,7 @@ It contains all variables defined within a process; `cpus` just
 happens to be one of them. Additionally, we can access all `input` variables via `task.binding`. Again, variables declared with `def` cannot be accessed. 
 
 **Input:**
-```nextflow
+```groovy
 process foo {                                                                   
     process_var = 42                                                            
     def other_var = 42                                                          
